@@ -4,9 +4,17 @@ import homeController from "../controllers/homeController";
 let router = express.Router();
 
 let initWebRoutes = (app) => {
-    app.get("/",homeController.getHomePage);
+    router.get("/", homeController.getHomePage);
 
-    app.get('/about', homeController.getAboutPage);
+    router.get("/about", homeController.getAboutPage);
+    router.get("/crud", homeController.getCRUD);
+    router.post("/post-crud", homeController.postCRUD);
+    router.get("/get-crud", homeController.displayGetCRUD);
+    router.get("/edit-crud", homeController.getEditCRUD);
+    router.get("/delete-crud", homeController.getDeleteCRUD);
+   
+    router.post("/put-crud", homeController.putCRUD);
+
     return app.use("/", router);
 };
 
