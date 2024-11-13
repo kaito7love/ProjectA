@@ -32,9 +32,25 @@
                     <input type="text" name="lastName" class="form-control" value="<%= user.lastName %>"/>
                 </div>
             </div>
-            <input type="text" name="id" value="<%= user.id %>" hidden>
+            <div class="row">
+                <div class="col-6">
+                    <label for="disabledTextInput" class="form-label">Phone</label>
+                    <input type="text" name="phone" class="form-control" value="<%= user.phone %>"/>
+                </div>
+                <div class="col-3">
+                    <label for="Gender" class="form-label">Gender</label>
+                    <select name="gender" class="form-select">
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div style="padding-top: 10px;">
+                <input type="text" name="id" value="<%= user.id %>" hidden>
             
-            <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            
         </form>
     </div>
 

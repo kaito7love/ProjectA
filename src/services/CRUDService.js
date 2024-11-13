@@ -29,7 +29,7 @@ let createUser = async (data) => {
 };
 
 let getAllUser = () => {
-    return new Promise(async (resolve, rejetc) => {
+    return new Promise(async (resolve, reject) => {
         try {
             let user = db.User.findAll({ raw: true });
 
@@ -51,7 +51,7 @@ let hashUserPassword = (password) => {
     });
 };
 let getUserById = (userId) => {
-    return new Promise(async (resolve, refect) => {
+    return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
                 where: { id: userId },
@@ -70,7 +70,7 @@ let getUserById = (userId) => {
 };
 
 let updateUserData = (data) => {
-    console.log("data from server", data);
+    // console.log("update from server", data);
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.id) {
@@ -82,12 +82,33 @@ let updateUserData = (data) => {
                 user.lastName = data.lastName;
                 await user.save();
 
-                let allUsers = await db.User.findAll({raw:true})
+                let allUsers = await db.User.findAll({ raw: true });
                 resolve(allUsers);
             } else {
                 resolve();
             }
-            
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+let deleteById = (id) => {
+    // console.log("delete from server", id);
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            if (!id) {
+                throw new Error("User ID is required for updating user data");
+            }
+            let user = await db.User.findOne({ where: { id: id } });
+            if (user) {
+                await user.destroy();
+                let allUsers = await db.User.findAll({ raw: true });
+                resolve(allUsers);
+            } else {
+                resolve();
+            }
         } catch (error) {
             reject(error);
         }
@@ -98,4 +119,5 @@ module.exports = {
     getAllUser: getAllUser,
     getUserById: getUserById,
     updateUserData: updateUserData,
+    deleteById: deleteById,
 };
