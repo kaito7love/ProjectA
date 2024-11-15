@@ -70,7 +70,7 @@ let getUserById = (userId) => {
 };
 
 let updateUserData = (data) => {
-    // console.log("update from server", data);
+    console.log("update from server", data);
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.id) {
@@ -78,8 +78,10 @@ let updateUserData = (data) => {
             }
             let user = await db.User.findOne({ where: { id: data.id } });
             if (user) {
+                user.email = data.email;
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
+                user.address = data.address;
                 await user.save();
 
                 let allUsers = await db.User.findAll({ raw: true });
@@ -94,10 +96,9 @@ let updateUserData = (data) => {
 };
 
 let deleteById = (id) => {
-    // console.log("delete from server", id);
+    console.log("delete from server", id);
     return new Promise(async (resolve, reject) => {
         try {
-
             if (!id) {
                 throw new Error("User ID is required for updating user data");
             }

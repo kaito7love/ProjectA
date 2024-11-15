@@ -55,10 +55,17 @@ let putCRUD = async (req, res) => {
 };
 let getDeleteCRUD = async (req, res) => {
     let id = req.query.id;
-    let allUsers= await CRUDService.deleteById(id);
-    return res.render("DisplayCRUD.ejs", {
+    console.log(id)
+    if (id) {
+        let allUsers= await CRUDService.deleteById(id);
+        return res.render("DisplayCRUD.ejs", {
         dataTable: allUsers,
     });
+    }else{
+        return res.send("delete wrong")
+    }
+    
+    
     
 };
 // object: {
