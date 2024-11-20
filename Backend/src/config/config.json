@@ -1,11 +1,11 @@
 {
     "development": {
         "username": "root",
-        "password": "1234",
-        "database": "medicaldata",
+        "password": "111111",
+        "database": "medicalData",
         "host": "127.0.0.1",
         "dialect": "mysql",
-        "port": "3309",
+        "port": "3306",
         "logging": false
     },
     "test": {
