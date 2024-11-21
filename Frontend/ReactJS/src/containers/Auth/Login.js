@@ -4,7 +4,7 @@ import { push } from "connected-react-router";
 
 import * as actions from "../../store/actions";
 import "./Login.scss";
-import { FormattedMessage } from "react-intl";
+import { handleLoginAPI } from "../../services/userService";
 
 class Login extends Component {
     constructor(props) {
@@ -28,9 +28,37 @@ class Login extends Component {
         // console.log(event.target.value);
     };
 
-    handleLogin = ()=>{
-        console.log(this.state);
-    }
+    handleLogin = async () => {
+        this.setState({
+            loginError: "",
+        });
+        // console.log(this.state);
+        try {
+            let data = await handleLoginAPI(
+                this.state.username,
+                this.state.password
+            );
+            console.log(data);
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    loginError: data.message,
+                });
+            }
+            if (data && data.errCode === 0) {
+                this.props.userLoginSuccess(data.user); 
+                console.log("login success");
+            }
+        } catch (error) {
+            if (error.response) {
+                if (error.response.data) {
+                    this.setState({
+                        loginError: error.response.data.message,
+                    });
+                }
+            }
+            console.log(error);
+        }
+    };
     render() {
         // const { username, password, loginError } = this.state;
         // const { lang } = this.props;
@@ -65,8 +93,18 @@ class Login extends Component {
                                     }}
                                 ></input>
                             </div>
+                            <div className="col-12" style={{ color: "red" }}>
+                                {this.state.loginError}
+                            </div>
                             <div className="col-12">
-                                <button className="btn-login" onClick={() =>{this.handleLogin()}}>Login</button>
+                                <button
+                                    className="btn-login"
+                                    onClick={() => {
+                                        this.handleLogin();
+                                    }}
+                                >
+                                    Login
+                                </button>
                             </div>
                             <div className="col-12 forgot-signup">
                                 <span className="forgot">
@@ -98,9 +136,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) =>
-            dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        
+        // userLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };
 };
 
