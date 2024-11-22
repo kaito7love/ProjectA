@@ -10,18 +10,21 @@ let handleUserLogin = (email, password) => {
             if (isExist) {
                 let user = await db.User.findOne({
                     where: { email: email },
-                    attributes:  ["email", "roleId" ,'password'] ,
-                    raw: true
+                    attributes: ["email", "roleId", "password"],
+                    raw: true,
                 });
                 if (user) {
-                    let check = await bcrypt.compareSync(password,user.password);
+                    let check = await bcrypt.compareSync(
+                        password,
+                        user.password
+                    );
                     if (check) {
                         userData.errCode = 0;
                         userData.errMessage = `Ok`;
                         delete user.password;
                         userData.user = user;
                     } else {
-                        userData.errCode = '3';
+                        userData.errCode = "3";
                         userData.errMessage = `Password incorrect`;
                         resolve(userData);
                     }
@@ -35,7 +38,7 @@ let handleUserLogin = (email, password) => {
                 userData.errMessage = `Email incorrect`;
                 resolve(userData);
             }
-            resolve(userData)
+            resolve(userData);
         } catch (error) {
             reject(error);
         }
@@ -58,6 +61,31 @@ let checkUserEmail = (userEmail) => {
     });
 };
 
+let getAllUsers = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = "";
+            if (userId === "All") {
+                users = db.User.findAll({
+                    attributes: { exclude: ["password"] },
+                    raw: true,
+                });
+            }
+            if (userId && userId !== "All") {
+                users = await db.User.findOne({
+                    where: { id: userId },
+                    attributes: { exclude: ["password"] },
+                    raw: true,
+                });
+            }
+            resolve(users);
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
 module.exports = {
     handleUserLogin: handleUserLogin,
+    getAllUsers: getAllUsers,
 };
