@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import db from "../models";
-import { where } from "sequelize";
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
@@ -96,13 +95,15 @@ let updateUserData = (data) => {
 };
 
 let deleteById = (id) => {
-    console.log("delete from server", id);
+   
     return new Promise(async (resolve, reject) => {
+        console.log("delete from server", id);
         try {
             if (!id) {
                 throw new Error("User ID is required for updating user data");
             }
             let user = await db.User.findOne({ where: { id: id } });
+            console.log("before delete from server", user);
             if (user) {
                 await user.destroy();
                 let allUsers = await db.User.findAll({ raw: true });
@@ -110,6 +111,7 @@ let deleteById = (id) => {
             } else {
                 resolve();
             }
+            
         } catch (error) {
             reject(error);
         }

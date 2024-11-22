@@ -8,4 +8,5 @@ const getAllUsers = (id) => {
     return axios.get(`/api/get-users?id=${id}`);
 };
 
+
 export { handleLoginAPI, getAllUsers };
