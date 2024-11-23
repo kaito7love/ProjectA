@@ -75,7 +75,7 @@ let updateUserData = (data) => {
             if (!data.id) {
                 throw new Error("User ID is required for updating user data");
             }
-            let user = await db.User.findOne({ where: { id: data.id } });
+            let user = await db.User.findOne({ where: { id: data.id }, raw: false,});
             if (user) {
                 user.email = data.email;
                 user.firstName = data.firstName;
@@ -105,7 +105,9 @@ let deleteById = (id) => {
             let user = await db.User.findOne({ where: { id: id } });
             console.log("before delete from server", user);
             if (user) {
-                await user.destroy();
+                await db.User.destroy({
+                    where: { id: id },
+                });
                 let allUsers = await db.User.findAll({ raw: true });
                 resolve(allUsers);
             } else {

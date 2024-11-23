@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
 import { getAllUsers } from "../../services/userService";
-
+// import ModelUser from "./ModelUser";
 class UserManage extends Component {
     constructor(props) {
         super(props);
@@ -29,12 +29,20 @@ class UserManage extends Component {
         }
         console.log("data1 :", response);
     }
-
+    handleAddNewUser = () => {};
     render() {
         let arrUsers = this.state.arrUsers;
         return (
-            <div className="users-container">
+            <div className="users-container row">
                 <div className="title text-center">User Manage</div>
+                <div className="mx-5">
+                    <button className="btn btn-primary" onClick={()=>this.handleAddNewUser()}>
+                        Add New User<i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div>
+                    {/* <ModelUser/> */}
+                </div>
                 <div className="users-table mt-4 mx-5">
                     <table id="customers">
                         <thead>

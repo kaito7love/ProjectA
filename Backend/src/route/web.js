@@ -5,6 +5,7 @@ import userController from "../controllers/userController";
 let router = express.Router();
 
 let initWebRoutes = (app) => {
+    //api backend
     router.get("/", homeController.displayGetCRUD);
 
     router.get("/create-crud", homeController.getCRUD);
@@ -15,7 +16,7 @@ let initWebRoutes = (app) => {
     router.get("/delete-crud", homeController.getDeleteCRUD);
     router.post("/put-crud", homeController.putCRUD);
 
-    //api
+    //api frontend
     router.post("/api/login", userController.handleLogin);
     router.get("/api/get-users", userController.handleGetAllUser)
     router.post("/api/create-user", userController.handleCreateUser)
