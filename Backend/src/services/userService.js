@@ -92,30 +92,32 @@ const createUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let check = await checkUserEmail(data.email);
-            if (check) {
+            if (check === true) {
                 resolve({
                     errCode: 1,
                     message: "Email used",
                 });
+            } else {
+                // note check type @gmail.com before create
+                let hashPasswordBcrypt = await hashUserPassword(data.password);
+                await db.User.create({
+                    email: data.email,
+                    password: hashPasswordBcrypt,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    gender: data.gender === "1" ? true : false,
+                    address: data.address,
+                    phone: data.phone,
+                    roleId: data.roleId,
+                    positionId: data.positionId,
+                    image: data.image,
+                });
+                resolve({
+                    errCode: 0,
+                    message: "Create user successful",
+                });
             }
-            let hashPasswordBcrypt = await hashUserPassword(data.password);
-            await db.User.create({
-                email: data.email,
-                password: hashPasswordBcrypt,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                gender: data.gender === "1" ? true : false,
-                address: data.address,
-                phone: data.phone,
-                roleId: data.roleId,
-                positionId: data.positionId,
-                image: data.image,
-            });
-            resolve({
-                errCode: 0,
-                message: "Create user successful",
-            });
-            console.log(data);
+            console.log("data from userService Backend: ",data);
         } catch (error) {
             reject(error);
         }

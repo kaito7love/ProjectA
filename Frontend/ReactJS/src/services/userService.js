@@ -8,5 +8,10 @@ const getAllUsers = (id) => {
     return axios.get(`/api/get-users?id=${id}`);
 };
 
+const createUser = (data) => {
+    console.log("check data service", data);
+    
+    return axios.post(`/api/create-user`, data);
+};
 
-export { handleLoginAPI, getAllUsers };
+export { handleLoginAPI, getAllUsers, createUser };
