@@ -2,17 +2,22 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
-import { getAllUsers } from "../../services/userService";
-// import ModelUser from "./ModelUser";
+import { getAllUsers, createUser } from "../../services/userService";
+import ModelUser from "./ModalUser";
 class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             arrUsers: [],
+            isOpenModelUser: false,
         };
     }
 
     async componentDidMount() {
+        await this.getAllUser();
+    }
+
+    getAllUser = async () => {
         let response = await getAllUsers("All");
 
         if (response && response.errCode === 0) {
@@ -22,26 +27,58 @@ class UserManage extends Component {
                 },
                 //start callback
                 () => {
-                    console.log("data2 :", response);
+                    // console.log("data2 :", response);
                 }
                 //end callback
             );
         }
-        console.log("data1 :", response);
-    }
-    handleAddNewUser = () => {};
+        // console.log("data1 :", response);
+    };
+    handleAddNewUser = () => {
+        this.setState({
+            isOpenModelUser: true,
+        });
+    };
+    toggleUserModel = () => {
+        this.setState({
+            isOpenModelUser: !this.state.isOpenModelUser,
+        });
+    };
+    createUsers = async (data) => {
+        try {
+            let res = await createUser(data);
+            if (res && res.message.errCode !== 0) {
+                alert(res.message.message);
+            } else {
+                await this.getAllUser();
+                this.setState({
+                    isOpenModelUser: false,
+                });
+            }
+            console.log("data from uMange", res);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     render() {
         let arrUsers = this.state.arrUsers;
         return (
             <div className="users-container row">
                 <div className="title text-center">User Manage</div>
-                <div className="mx-5">
-                    <button className="btn btn-primary" onClick={()=>this.handleAddNewUser()}>
-                        Add New User<i class="fas fa-plus"></i>
+                <div className="mx-5 ">
+                    <button
+                        className="btn btn-primary btn-addNewUser"
+                        onClick={() => this.handleAddNewUser()}
+                    >
+                        Add New User<i className="fas fa-plus"></i>
                     </button>
                 </div>
                 <div>
-                    {/* <ModelUser/> */}
+                    <ModelUser
+                        isOpenModelUser={this.state.isOpenModelUser}
+                        toggleUserModel={this.toggleUserModel}
+                        createUser={this.createUsers}
+                    />
                 </div>
                 <div className="users-table mt-4 mx-5">
                     <table id="customers">
@@ -54,33 +91,32 @@ class UserManage extends Component {
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {arrUsers &&
                                 arrUsers.map((item, index) => {
-                                    console.log("check Map", index, item);
+                                    // console.log("check Map", index, item);
                                     return (
-                                        <>
-                                            <tr>
-                                                <td>{item.email}</td>
-                                                <td>{item.firstName}</td>
-                                                <td>{item.lastName}</td>
-                                                <td>{item.address}</td>
-                                                <td>
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-outline-success btn-Edit"
-                                                    >
-                                                        <i class="fas fa-user-edit"></i>
-                                                    </button>
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-outline-danger btn-Delete"
-                                                    >
-                                                        <i class="fas fa-user-slash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </>
+                                        <tr key={index}>
+                                            <td>{item.email}</td>
+                                            <td>{item.firstName}</td>
+                                            <td>{item.lastName}</td>
+                                            <td>{item.address}</td>
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-success btn-Edit"
+                                                >
+                                                    <i className="fas fa-user-edit"></i>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-outline-danger btn-Delete"
+                                                >
+                                                    <i className="fas fa-user-slash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     );
                                 })}
                         </tbody>

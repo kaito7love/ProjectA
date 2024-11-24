@@ -1,5 +1,5 @@
 import db from "../models";
-import userService from "../services/UserService";
+import userService from "../services/userService";
 
 let handleLogin = async (req, res) => {
     let email = req.body.email;
