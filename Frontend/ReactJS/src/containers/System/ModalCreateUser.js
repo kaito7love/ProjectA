@@ -3,8 +3,9 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { emitter } from "../../utils/emitter";
 
-class ModelUser extends Component {
+class ModalCreateUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +17,22 @@ class ModelUser extends Component {
             gender: "1",
             roleId: "2",
         };
+        this.listenToEmitter();
         this.toggle = this.toggle.bind(this);
+    }
+    listenToEmitter() {
+        emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
+            // reset state
+            this.setState({
+                email: "",
+                password: "",
+                firstName: "",
+                lastName: "",
+                address: "",
+                gender: "1",
+                roleId: "2",
+            });
+        });
     }
     handleOnChangeInput = (event, id) => {
         // good setState
@@ -61,24 +77,26 @@ class ModelUser extends Component {
         let isValid = this.validateInput();
         if (isValid) {
             //  call api create new model
-            this.props.createUser(this.state);
+            this.props.createUsers(this.state);
             // console.log("data save", this.state);
         }
     }
-    componentDidMount() {}
+    componentDidMount() {
+        console.log("modal create");
+    }
 
     render() {
         // console.log(
         //     this.props,
         //     "model from model user",
-        //     this.props.isOpenModelUser,
+        //     this.props.isOpenModalCreateUser,
         //     this.props.toggleUserModel
         // );
 
         return (
             <>
                 <Modal
-                    isOpen={this.props.isOpenModelUser}
+                    isOpen={this.props.isOpen}
                     toggle={this.toggle}
                     className={this.props.className}
                     size="lg"
@@ -226,8 +244,9 @@ class ModelUser extends Component {
                                                 );
                                             }}
                                         >
-                                            <option value="2">Doctor</option>
                                             <option value="1">Admin</option>
+                                            <option value="2">Doctor</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -262,4 +281,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModelUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalCreateUser);

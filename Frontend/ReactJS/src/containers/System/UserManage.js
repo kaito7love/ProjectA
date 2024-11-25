@@ -2,14 +2,24 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
-import { getAllUsers, createUser } from "../../services/userService";
-import ModelUser from "./ModalUser";
+import { emitter } from "../../utils/emitter";
+import {
+    getAllUsers,
+    createUserService,
+    deleteUserService,
+    editUserService,
+} from "../../services/userService";
+import ModalCreateUser from "./ModalCreateUser";
+import ModalEditUser from "./ModalEditUser";
+
 class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             arrUsers: [],
-            isOpenModelUser: false,
+            isOpenModalCreateUser: false,
+            isOpenModalEditUser: false,
+            userEdit: {},
         };
     }
 
@@ -36,30 +46,79 @@ class UserManage extends Component {
     };
     handleAddNewUser = () => {
         this.setState({
-            isOpenModelUser: true,
+            isOpenModalCreateUser: true,
         });
     };
     toggleUserModel = () => {
         this.setState({
-            isOpenModelUser: !this.state.isOpenModelUser,
+            isOpenModalCreateUser: !this.state.isOpenModalCreateUser,
         });
     };
+    toggleUserEditModel = () => {
+        this.setState({
+            isOpenModalEditUser: !this.state.isOpenModalEditUser,
+        });
+    };
+
     createUsers = async (data) => {
         try {
-            let res = await createUser(data);
+            let res = await createUserService(data);
             if (res && res.message.errCode !== 0) {
                 alert(res.message.message);
             } else {
                 await this.getAllUser();
                 this.setState({
-                    isOpenModelUser: false,
+                    isOpenModalCreateUser: false,
                 });
+                emitter.emit("EVENT_CLEAR_MODAL_DATA");
             }
             console.log("data from uMange", res);
         } catch (error) {
             console.log(error);
         }
     };
+
+    handleDeleteUser = async (user) => {
+        try {
+            let res = await deleteUserService(user.id);
+            if (res && res.errCode === 0) {
+                await this.getAllUser();
+            } else {
+                console.log(res.message.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        // console.log("delete", user);
+    };
+
+    handleEditUser = (user) => {
+        console.log("edit by id:", user.id);
+        this.setState({
+            isOpenModalEditUser: true,
+            userEdit: user,
+        });
+    };
+
+    updateUser = async (user) => {
+        try {
+            console.log("save user from edit", user);
+            let res = await editUserService(user);
+            if (res && res.message.errCode !== 0) {
+                
+                await this.getAllUser();
+                this.setState({
+                    isOpenModalEditUser: false,
+                })
+            } else {
+                console.log("res user from edit", res);
+            }
+            
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     render() {
         let arrUsers = this.state.arrUsers;
         return (
@@ -70,15 +129,25 @@ class UserManage extends Component {
                         className="btn btn-primary btn-addNewUser"
                         onClick={() => this.handleAddNewUser()}
                     >
-                        Add New User<i className="fas fa-plus"></i>
+                        <i className="fas fa-plus"></i>Add New User
                     </button>
                 </div>
                 <div>
-                    <ModelUser
-                        isOpenModelUser={this.state.isOpenModelUser}
+                    <ModalCreateUser
+                        isOpen={this.state.isOpenModalCreateUser}
                         toggleUserModel={this.toggleUserModel}
-                        createUser={this.createUsers}
+                        createUsers={this.createUsers}
                     />
+                </div>
+                <div>
+                    {this.state.isOpenModalEditUser && (
+                        <ModalEditUser
+                            isOpen={this.state.isOpenModalEditUser}
+                            toggleUserModel={this.toggleUserEditModel}
+                            currentUser={this.state.userEdit}
+                            updateUser={this.updateUser}
+                        />
+                    )}
                 </div>
                 <div className="users-table mt-4 mx-5">
                     <table id="customers">
@@ -106,12 +175,22 @@ class UserManage extends Component {
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-success btn-Edit"
+                                                    onClick={() =>
+                                                        this.handleEditUser(
+                                                            item
+                                                        )
+                                                    }
                                                 >
                                                     <i className="fas fa-user-edit"></i>
                                                 </button>
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-danger btn-Delete"
+                                                    onClick={() =>
+                                                        this.handleDeleteUser(
+                                                            item
+                                                        )
+                                                    }
                                                 >
                                                     <i className="fas fa-user-slash"></i>
                                                 </button>

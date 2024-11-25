@@ -157,7 +157,7 @@ let deleteUser = (userId) => {
 let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
+            // console.log("data update" ,data);
 
             if (!data.id) {
                 resolve({
@@ -171,10 +171,11 @@ let updateUserData = (data) => {
                 raw: false,
             });
             if (user) {
-                user.email = data.email;
+                // user.email = data.email;
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
                 user.address = data.address;
+                user.phone = data.phone;
                 await user.save();
 
                 resolve({
