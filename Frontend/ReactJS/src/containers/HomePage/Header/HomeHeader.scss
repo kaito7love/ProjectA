@@ -25,10 +25,11 @@
             padding: 0 20px;
         }
         .header-logo {
-            width: 130px;
-            height: 70px;
+            margin-left: 10px;
+            width: 140px;
+            height: 80px;
             // scale: 10%;
-            background: url(../../../assets/logo.jpg) center center no-repeat;
+            background: url(../../../assets/logo.png) center center no-repeat;
             background-size: cover;
             cursor: pointer;
         }
@@ -85,23 +86,23 @@
                 .Vie {
                     padding: 0 5px;
                     opacity: 0.2;
-                    &.action, &:hover {
+                    &.action,
+                    &:hover {
                         opacity: 1;
                         color: red;
                     }
                 }
                 .Vie span {
                     cursor: pointer;
-                    
                 }
                 .En {
                     opacity: 0.2;
                     padding: 0 5px;
-                    &.action, &:hover {
+                    &.action,
+                    &:hover {
                         opacity: 1;
                         color: blue;
                     }
-                   
                 }
                 .En span {
                     cursor: pointer;
