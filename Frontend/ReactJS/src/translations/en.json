@@ -1,4 +1,14 @@
 {
+
+
+    "home-header":{
+        "all": "All",
+        "support":"Support",
+        "appointment":"Appointment"
+    },
+
+
+
     "common": {
         "add": "Add",
         "edit": "Edit",

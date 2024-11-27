@@ -1,4 +1,13 @@
 {
+    "home-header":{
+        "all": "Tất Cả",
+        "support":"Hỗ Trợ",
+        "appointment":"Lịch Hẹn"
+    },
+
+
+
+
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

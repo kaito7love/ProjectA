@@ -1,0 +1,112 @@
+.home-header-container {
+    width: 100%;
+    height: 80px;
+}
+
+.home-header-content {
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+
+    .left-content {
+        width: 20%;
+        align-items: center;
+        justify-self: center;
+        display: flex;
+        padding-left: 40px;
+
+        .header-bar {
+            font-size: 30px;
+            cursor: pointer;
+            padding: 0 20px;
+        }
+        .header-logo {
+            width: 130px;
+            height: 70px;
+            // scale: 10%;
+            background: url(../../../assets/logo.jpg) center center no-repeat;
+            background-size: cover;
+            cursor: pointer;
+        }
+    }
+    .mid-content {
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        padding-top: 5px;
+
+        .header-service {
+            // width: 20%;
+            padding: 0 15px;
+
+            .detail-service-choose {
+                color: white;
+                background-color: orange;
+                border-radius: 20px;
+                display: inline-block;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+            .detail-service-content {
+                border-radius: 20px;
+                display: inline-block;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+        }
+    }
+    .right-content {
+        width: 30%;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        padding-left: 10px;
+        padding-top: 15px;
+        color: rgba(59, 130, 246, 0.5);
+
+        .header-info {
+            text-align: center;
+            justify-self: center;
+            padding: 0 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .header-language {
+            .language {
+                display: flex;
+                padding: 0 5px;
+                color: #000;
+                .Vie {
+                    padding: 0 5px;
+                    opacity: 0.2;
+                    &.action, &:hover {
+                        opacity: 1;
+                        color: red;
+                    }
+                }
+                .Vie span {
+                    cursor: pointer;
+                    
+                }
+                .En {
+                    opacity: 0.2;
+                    padding: 0 5px;
+                    &.action, &:hover {
+                        opacity: 1;
+                        color: blue;
+                    }
+                   
+                }
+                .En span {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
