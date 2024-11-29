@@ -7,9 +7,11 @@ import { changeLanguageApp } from "../../../store/actions";
 
 class HomeHeader extends Component {
     changeLanguage = (language) => {
-        console.log(language);
+        // console.log(language);
         this.props.changeLanguageAppRedux(language);
     };
+
+
 
     // make color
     // componentDidMount() {
@@ -17,6 +19,9 @@ class HomeHeader extends Component {
     //     script.src = "https://static.elfsight.com/platform/platform.js";
     //     script.async = true;
     //     script.onload = () => {
+    //         this.changeLanguage(this.props.lang)
+    //         this.setState({ scriptLoaded: true });
+    //         console.log("Loading :", this.props.lang);
     //         console.log("Elfsight script loaded.");
     //     };
     //     document.body.appendChild(script);
@@ -129,8 +134,6 @@ class HomeHeader extends Component {
                         </div> */}
                     </div>
                 </div>
-                <div style={{ height: 1000, backgroundColor: "red" }}></div>
-                <div style={{ backgroundColor: "blue" }}>end</div>
             </div>
         );
     }
@@ -151,3 +154,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+
