@@ -15,11 +15,11 @@ const createUserService = (data) => {
 };
 
 const deleteUserService = (id) => {
-    return axios.delete("/api/delete-user", {data: { id: id }});
+    return axios.delete("/api/delete-user", { data: { id: id } });
 };
 
 const editUserService = (data) => {
     return axios.put("/api/edit-user", data);
 };
 
-export { handleLoginAPI, getAllUsers, createUserService, deleteUserService ,editUserService};
+export { handleLoginAPI, getAllUsers, createUserService, deleteUserService, editUserService };

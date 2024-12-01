@@ -47,6 +47,7 @@ let handleUserLogin = (email, password) => {
         }
     });
 };
+
 let checkUserEmail = (userEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -117,7 +118,7 @@ const createUser = (data) => {
                     message: "Create user successful",
                 });
             }
-            console.log("data from userService Backend: ",data);
+            console.log("data from userService Backend: ", data);
         } catch (error) {
             reject(error);
         }
@@ -134,6 +135,7 @@ let hashUserPassword = (password) => {
         }
     });
 };
+
 let deleteUser = (userId) => {
     return new Promise(async (resolve, reject) => {
         let user = await db.User.findOne({
@@ -154,6 +156,7 @@ let deleteUser = (userId) => {
         });
     });
 };
+
 let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -191,10 +194,35 @@ let updateUserData = (data) => {
         }
     });
 };
+
+let getAllCodeService = (typeInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let message = {}
+            if (!typeInput) {
+                return res.status(200).json({
+                    errCode: -1,
+                    errMessage: "Missing Type Input"
+                })
+            } else {
+                let allCodeData = await db.Allcode.findAll({
+                    where: { type: typeInput }
+                });
+                message.errCode = 0;
+                message.errMessage = "Get successful allcode data";
+                message.data = allCodeData;
+            }
+            resolve(message)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
     createUser: createUser,
     deleteUser: deleteUser,
     updateUserData: updateUserData,
+    getAllCodeService: getAllCodeService,
 };

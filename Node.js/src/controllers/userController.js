@@ -42,13 +42,13 @@ let handleCreateUser = async (req, res) => {
     });
 };
 
-const handleEditUser = async (req, res) => {
+let handleEditUser = async (req, res) => {
     let data = req.body;
     let message = await userService.updateUserData(data);
     return res.status(200).json(message);
 };
 
-const handleDeleteUser = async (req, res) => {
+let handleDeleteUser = async (req, res) => {
     if (!req.body.id) {
         return res.status(200).json({
             errCode: 1,
@@ -59,10 +59,23 @@ const handleDeleteUser = async (req, res) => {
     // console.log(message);
     return res.status(200).json(message);
 };
+
+let getAllCode = async (req, res) => {
+    try {
+        let message = await userService.getAllCodeService(req.query.type);
+        return res.status(200).json(message)
+    } catch (error) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Error From Server"
+        })
+    }
+}
 module.exports = {
     handleLogin: handleLogin,
     handleGetAllUser: handleGetAllUser,
     handleCreateUser: handleCreateUser,
     handleEditUser: handleEditUser,
     handleDeleteUser: handleDeleteUser,
+    getAllCode: getAllCode,
 };
