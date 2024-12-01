@@ -47,9 +47,9 @@ class App extends Component {
                 <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
-                        {this.props.isLoggedIn && <Header />}
+                        {/* {this.props.isLoggedIn && <Header />} */}
                         <div className="content-container">
-                            <CustomScrollbars style={{height:'100vh',width:'100%'}}>
+                            <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.HOMEPAGE} exact component={(HomePage)} />

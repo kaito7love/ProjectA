@@ -57,7 +57,7 @@
     font-weight: 500;
 }
 .section-background-specialty {
-    // background-image: url("./../../../images/140311-background5.png");
+    // background-image: url("/images/140311-background5.png");
     padding: 5px 0;
     margin: 5px;
     .section-specialty {
@@ -100,7 +100,7 @@
 }
 
 .section-background-doctor {
-    background-image: url("./../../../images/140311-background5.png");
+    // background-image: url("../../../../public/images/140311-background5.png");
     padding: 5px 0;
     .section-doctor {
         .section-content {
@@ -141,7 +141,7 @@
 }
 
 .section-background-medicalFacility {
-    // background-image: url("./../../../images/140311-background5.png");
+    // background-image: url("/images/140311-background5.png");
     padding: 5px 0;
     .section-medicalFacility {
         .section-content {
@@ -185,7 +185,7 @@
 }
 
 .section-background-social {
-    background-image: url("./../../../images/140311-background5.png");
+    // background-image: src= "/images/140311-background5.png";
     padding: 5px 0 15px 0;
     .section-social {
         .section-content {
@@ -203,19 +203,23 @@
             display: flex;
             padding: 0 5px;
             .social-left {
-                max-width: 550px;
+                width: 100%;
+                max-width: 50%px;
             }
             .social-right {
                 display: flex;
                 justify-content: space-between;
                 padding: 0 5px;
-                max-width: 550px;
+                width: 100%;
+                max-width: 50%px;
                 .media-left {
-                    width: 250px;
+                    width: 100%;
+                    max-width: 50%px;
                     flex-direction: column;
                 }
                 .media-right {
-                    width: 250px;
+                    width: 100%;
+                    max-width: 50%px;
                     flex-direction: column;
                 }
 

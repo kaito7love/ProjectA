@@ -94,35 +94,11 @@ class HomeHeader extends Component {
                         </div> */}
                         <div className="header-language">
                             <div className="language">
-                                <div
-                                    className={
-                                        language === LANGUAGES.VI
-                                            ? "Vie action"
-                                            : "Vie"
-                                    }
-                                >
-                                    <span
-                                        onClick={() =>
-                                            this.changeLanguage(LANGUAGES.VI)
-                                        }
-                                    >
-                                        VN
-                                    </span>
+                                <div className={language === LANGUAGES.VI ? "Vie action" : "Vie"}>
+                                    <span onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
                                 </div>
-                                <div
-                                    className={
-                                        language === LANGUAGES.EN
-                                            ? "En action"
-                                            : "En"
-                                    }
-                                >
-                                    <span
-                                        onClick={() =>
-                                            this.changeLanguage(LANGUAGES.EN)
-                                        }
-                                    >
-                                        EN
-                                    </span>
+                                <div className={language === LANGUAGES.EN ? "En action" : "En"} >
+                                    <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
                                 </div>
                             </div>
                         </div>
@@ -148,8 +124,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeLanguageAppRedux: (language) =>
-            dispatch(changeLanguageApp(language)),
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
     };
 };
 

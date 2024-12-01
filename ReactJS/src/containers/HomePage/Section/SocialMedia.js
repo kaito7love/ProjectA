@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Section.scss'
 
-import img from './../../../images/vnexpress.png';
-
 class SocialMedia extends Component {
 
 
@@ -22,14 +20,10 @@ class SocialMedia extends Component {
                             </div>
                             <div className="social-right">
                                 <div className='media-left'>
-                                    {/* <img src={img} className='slider-img'></img>
-                                     */}
-
-                                    ssssssssssssssssssssssssssssss
+                                    <img src='./images/vnexpress.png' className='slider-img'></img>
                                 </div>
                                 <div className='media-right'>
                                     {/* <img src={img} className='slider-img'></img> */}
-                                    rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
                                 </div>
                             </div>
                         </div>

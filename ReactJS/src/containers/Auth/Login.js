@@ -110,7 +110,7 @@ class Login extends Component {
                                 <span className="forgot">
                                     Forgot your password?
                                 </span>
-                                <span className="signup">Sign Up</span>
+                                {/* <span className="signup">Sign Up</span> */}
                             </div>
                             <div className="col-12 text-center">
                                 <span>Or Login With:</span>

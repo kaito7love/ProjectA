@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Slider from "react-slick";
 import './Section.scss'
 
-import img from './../../../images/104940-bs-vi.jpg';
+// import img from './../../../images/104940-bs-vi.jpg';
 
 
 class Doctor extends Component {
@@ -31,31 +31,31 @@ class Doctor extends Component {
                                 <Slider {...settings}>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src={img} className='slider-img'></img>
+                                            {/* <img src={img} className='slider-img'></img> */}
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src={img} className='slider-img'></img>
+                                            {/* <img src={img} className='slider-img'></img> */}
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src={img} className='slider-img'></img>
+                                            {/* <img src={img} className='slider-img'></img> */}
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src={img} className='slider-img'></img>
+                                            {/* <img src={img} className='slider-img'></img> */}
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src={img} className='slider-img'></img>
+                                            {/* <img src={img} className='slider-img'></img> */}
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
