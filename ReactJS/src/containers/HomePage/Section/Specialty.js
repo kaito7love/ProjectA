@@ -32,31 +32,31 @@ class Specialty extends Component {
                                 <Slider {...settings}>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            {/* <img src={img} alt="React Image" className='slider-img' /> */}
+                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            {/* <img src={img} className='slider-img'></img> */}
+                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            {/* <img src={img} className='slider-img'></img> */}
+                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            {/* <img src={img} className='slider-img'></img> */}
+                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            {/* <img src={img} className='slider-img'></img> */}
+                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>

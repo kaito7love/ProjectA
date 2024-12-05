@@ -1,34 +1,11 @@
 {
-
-
-    "home-header":{
+    "home-header": {
         "all": "All",
-        "support":"Support",
-        "appointment":"Appointment"
+        "support": "Support",
+        "appointment": "Appointment",
+        "welcome": "Welcome, "
     },
 
-
-
-    "common": {
-        "add": "Add",
-        "edit": "Edit",
-        "delete": "Delete",
-        "decentralize": "Decentralize",
-        "close": "Close",
-        "save": "Save",
-        "refresh": "Refresh",
-        "accept": "Accept",
-        "confirm": "Confirm",
-        "confirm-this-task": "Are you sure to process this task?",
-        "fail-to-load-data": "Fail to load data",
-        "unknown-error": "There was an error",
-        "internal-server-error": "Internal server error",
-        "bad-request": "Bad request",
-        "forbiden-request": "Invalid input data",
-        "fail-to-load-all-code": "Fail to load data from allcode",
-        "sum": "Sum",
-        "date-range-invalid": "Date range invalid"
-    },
     "login": {
         "login": "Login",
         "username": "Username",
@@ -47,8 +24,35 @@
             "system-parameter": {
                 "header": "System-parameter"
             }
+        },
+        "admin": {
+            "user": "Users",
+            "manage-user": "Manage User",
+            "manage-admin": "Manage Admin",
+            "manage-doctor": "Manage Doctor",
+            "crud-user": "crud user",
+            "crud-redux": "crud admin",
+            "clinic": "Clinic",
+            "manage-clinic": "Manage Clinic",
+            "specialty": "Specialty",
+            "manage-specialty": "Manage Specialty",
+            "blog": "Blog",
+            "manage-blog": "Manage Blog"
         }
     },
+    "form": {
+        "email": "Email",
+        "password": "Password",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "address": "Address",
+        "phone": "Phone Number",
+        "gender": "Gender",
+        "role": "Role",
+        "position": "Position",
+        "save":"Save"
+    },
+
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Fail to load system users list",

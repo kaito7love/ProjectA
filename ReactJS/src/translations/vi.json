@@ -1,39 +1,18 @@
 {
-    "home-header":{
+    "home-header": {
         "all": "Tất Cả",
-        "support":"Hỗ Trợ",
-        "appointment":"Lịch Hẹn"
+        "support": "Hỗ Trợ",
+        "appointment": "Lịch Hẹn",
+        "welcome": "Xin Chào, "
     },
 
-
-
-
-    "common": {
-        "add": "Thêm",
-        "edit": "Sửa",
-        "delete": "Xóa",
-        "decentralize": "Phân quyền",
-        "close": "Đóng",
-        "save": "Lưu",
-        "refresh": "Refresh",
-        "accept": "Chấp nhận",
-        "confirm": "Xác nhận",
-        "confirm-this-task": "Bạn có chắc chắn thực hiện tác vụ này?",
-        "fail-to-load-data": "Không thể tải về dữ liệu",
-        "unknown-error": "Có lỗi xảy ra",
-        "internal-server-error": "Lỗi kết nối",
-        "bad-request": "Yêu cầu không hợp lệ",
-        "forbiden-request": "Thông tin truyền vào không hợp lệ",
-        "fail-to-load-all-code": "Không thể tải về dữ liệu allcode",
-        "sum": "Tổng",
-        "date-range-invalid": "Khoảng thời gian không hợp lệ"
-    },
     "login": {
         "login": "Đăng nhập",
         "username": "Tên đăng nhập",
         "password": "Mật khẩu",
         "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
     },
+
     "menu": {
         "system": {
             "header": "Hệ thống",
@@ -46,8 +25,36 @@
             "system-parameter": {
                 "header": "Tham số hệ thống"
             }
+        },
+        "admin": {
+            "user": "Người dùng",
+            "manage-user": "Quản lý người dùng",
+            "manage-admin": "Quản lý Admin",
+            "manage-doctor": "Quản lý Bác sĩ",
+            "crud-user": "crud user",
+            "crud-redux": "crud admin",
+            "clinic": "Phòng khám",
+            "manage-clinic": "Quản lý phòng khám",
+            "specialty": "Chuyên Khoa",
+            "manage-specialty": "Chuyên Khoa",
+            "blog": "Cẩm nang",
+            "manage-blog": "Quản lý cẩm nang"
         }
     },
+
+    "form": {
+        "email": "Email",
+        "password": "Mật khẩu",
+        "firstName": "Tên",
+        "lastName": "Họ",
+        "address": "Địa chỉ",
+        "phone": "Số điện thoại",
+        "gender": "Giới tính",
+        "role": "Vai trò",
+        "position": "Chức danh",
+        "save": "Lưu"
+    },
+
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Không thể tải về danh sách người dùng",

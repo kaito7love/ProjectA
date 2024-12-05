@@ -122,14 +122,14 @@ class UserManage extends Component {
     render() {
         let arrUsers = this.state.arrUsers;
         return (
-            <div className="users-container row">
+            <div className="users-container">
                 <div className="title text-center">User Manage</div>
                 <div className="mx-5 ">
                     <button
                         className="btn btn-primary btn-addNewUser"
                         onClick={() => this.handleAddNewUser()}
                     >
-                        <i className="fas fa-plus"></i>Add New User
+                        <i className="fas fa-plus"></i><span>Add New User</span>
                     </button>
                 </div>
                 <div>
