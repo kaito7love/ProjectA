@@ -106,7 +106,7 @@ const createUser = (data) => {
                     password: hashPasswordBcrypt,
                     firstName: data.firstName,
                     lastName: data.lastName,
-                    gender: data.gender === "1" ? true : false,
+                    gender: data.gender,
                     address: data.address,
                     phone: data.phone,
                     roleId: data.roleId,

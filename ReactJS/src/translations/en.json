@@ -50,6 +50,8 @@
         "gender": "Gender",
         "role": "Role",
         "position": "Position",
+        "image": "Ảnh",
+        "imageLoad":"Tải ảnh",
         "save":"Save"
     },
 
