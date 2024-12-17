@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-// import "./UserManage.scss";
+import "./UserManage.scss";
 import { emitter } from "../../utils/emitter";
 import {
     getAllUsers,
@@ -33,7 +33,7 @@ class UserManage extends Component {
         if (response && response.errCode === 0) {
             this.setState(
                 {
-                    arrUsers: response.user,
+                    arrUsers: response.users,
                 },
                 //start callback
                 () => {
@@ -105,7 +105,7 @@ class UserManage extends Component {
             console.log("save user from edit", user);
             let res = await editUserService(user);
             if (res && res.message.errCode !== 0) {
-                
+
                 await this.getAllUser();
                 this.setState({
                     isOpenModalEditUser: false,
@@ -113,7 +113,7 @@ class UserManage extends Component {
             } else {
                 console.log("res user from edit", res);
             }
-            
+
         } catch (error) {
             console.log(error);
         }

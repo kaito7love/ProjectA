@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "remarkable": "2.0.1",
     "@formatjs/intl-pluralrules": "^3.5.6",
     "@formatjs/intl-relativetimeformat": "^7.3.6",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
@@ -10,6 +11,7 @@
     "bootstrap": "^5.0.1",
     "connected-react-router": "^6.9.1",
     "lodash": "^4.17.21",
+    "markdown-it": "^12.1.0",
     "moment": "^2.29.0",
     "react": "^17.0.2",
     "react-auth-wrapper": "^1.0.0",
@@ -21,6 +23,7 @@
     "react-flatpickr": "^3.10.7",
     "react-image-lightbox": "^5.1.4",
     "react-intl": "^5.20.2",
+    "react-markdown-editor-lite": "^1.3.0",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

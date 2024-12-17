@@ -12,8 +12,14 @@ class TableManageUser extends Component {
         this.state = {
             arrUsers: [],
             userEdit: {},
+            postContent: "_Hello,_ **Markdown**!", // Define the initial state here
         };
     }
+
+    handleEditorChange = ({ html, text }) => {
+        console.log("Editor Change:", html, text);
+        this.setState({ postContent: text }); // Update state when the editor content changes
+    };
 
     async componentDidMount() {
         this.props.fetchAllUser();
@@ -42,59 +48,68 @@ class TableManageUser extends Component {
     render() {
         let arrUsers = this.state.arrUsers;
         return (
-            <div className="users-container">
-                <div className="users-table mt-4 mb-4">
-                    <table id="customers">
-                        <thead>
-                            <tr>
-                                <th scope="col">Email</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
+            <React.Fragment>
+                <div className="users-container">
+                    <div className="users-table mt-4 mb-4">
+                        <table id="customers">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            {arrUsers &&
-                                arrUsers.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{item.email}</td>
-                                            <td>{item.firstName}</td>
-                                            <td>{item.lastName}</td>
-                                            <td>{item.address}</td>
-                                            <td>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-success btn-Edit"
-                                                    onClick={() =>
-                                                        this.handleEditUser(
-                                                            item
-                                                        )
-                                                    }
-                                                >
-                                                    <i className="fas fa-user-edit"></i>
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-danger btn-Delete"
-                                                    onClick={() =>
-                                                        this.handleDeleteUser(
-                                                            item
-                                                        )
-                                                    }
-                                                >
-                                                    <i className="fas fa-user-slash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                        </tbody>
-                    </table>
+                            <tbody>
+                                {arrUsers &&
+                                    arrUsers.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{item.email}</td>
+                                                <td>{item.firstName}</td>
+                                                <td>{item.lastName}</td>
+                                                <td>{item.address}</td>
+                                                <td>
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-outline-success btn-Edit"
+                                                        onClick={() =>
+                                                            this.handleEditUser(
+                                                                item
+                                                            )
+                                                        }
+                                                    >
+                                                        <i className="fas fa-user-edit"></i>
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-outline-danger btn-Delete"
+                                                        onClick={() =>
+                                                            this.handleDeleteUser(
+                                                                item
+                                                            )
+                                                        }
+                                                    >
+                                                        <i className="fas fa-user-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-            </div>
+                <div>
+                    <>
+
+                    </>
+                </div>
+            </React.Fragment>
+
         );
     }
 }

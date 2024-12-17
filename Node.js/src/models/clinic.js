@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     Clinic.init(
         {
-            clinicid: DataTypes.INTEGER,
+            clinicId: DataTypes.INTEGER,
             name: DataTypes.STRING,
             address: DataTypes.STRING,
             description: DataTypes.TEXT,

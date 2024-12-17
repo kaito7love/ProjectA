@@ -40,3 +40,17 @@
         padding-left: 5px;
     }
 }
+.input-markdown {
+    width: 48%;
+    height: 200px;
+}
+.output-markdown {
+    width: 48%;
+    height: 200px;
+    border: 1px solid black;
+}
+.markdown-content {
+    display: flex;
+    padding-bottom: 10px;
+    justify-content: space-between;
+}
