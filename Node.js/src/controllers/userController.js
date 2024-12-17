@@ -36,10 +36,10 @@ let handleGetAllUser = async (req, res) => {
 
 let handleCreateUser = async (req, res) => {
     let message = await userService.createUser(req.body);
-    // console.log(message);
-    return res.status(200).json({
-        message,
-    });
+    console.log("be", message);
+    return res.status(200).json(
+        message
+    );
 };
 
 let handleEditUser = async (req, res) => {
@@ -62,6 +62,7 @@ let handleDeleteUser = async (req, res) => {
 
 let getAllCode = async (req, res) => {
     try {
+        // console.log(req.query.type);
         
         let message = await userService.getAllCodeService(req.query.type);
         return res.status(200).json(message)
@@ -72,11 +73,11 @@ let getAllCode = async (req, res) => {
         })
     }
 }
-module.exports = {
-    handleLogin: handleLogin,
-    handleGetAllUser: handleGetAllUser,
-    handleCreateUser: handleCreateUser,
-    handleEditUser: handleEditUser,
-    handleDeleteUser: handleDeleteUser,
-    getAllCode: getAllCode,
+export default {
+    handleLogin,
+    handleGetAllUser,
+    handleCreateUser,
+    handleEditUser,
+    handleDeleteUser,
+    getAllCode,
 };

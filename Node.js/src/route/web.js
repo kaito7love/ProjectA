@@ -1,20 +1,10 @@
 import express from "express";
-import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
+import doctorController from "../controllers/doctorController"
 
 let router = express.Router();
 
 let initWebRoutes = (app) => {
-    //api backend
-    router.get("/", homeController.displayGetCRUD);
-
-    router.get("/create-crud", homeController.getCRUD);
-    router.post("/post-crud", homeController.postCRUD);
-    router.get("/get-crud", homeController.displayGetCRUD);
-    router.get("/edit-crud", homeController.getEditCRUD);
-
-    router.get("/delete-crud", homeController.getDeleteCRUD);
-    router.post("/put-crud", homeController.putCRUD);
 
     //api frontend
     router.post("/api/login", userController.handleLogin);
@@ -24,6 +14,8 @@ let initWebRoutes = (app) => {
     router.delete("/api/delete-user", userController.handleDeleteUser)
 
     router.get("/api/allcode", userController.getAllCode);
+    
+    router.get("/api/doctor-home", doctorController.getTopDoctor);
 
     return app.use("/", router);
 };

@@ -43,21 +43,21 @@ class UserRedux extends Component {
             let arrGender = this.props.genderRedux;
             this.setState({
                 genders: arrGender,
-                gender: arrGender && arrGender.length > 0 ? arrGender[0].key : 'null'
+                gender: arrGender && arrGender.length > 0 ? arrGender[0].keyMap : 'null'
             })
         }
         if (prevProps.positionRedux !== this.props.positionRedux) {
             let arrPosition = this.props.positionRedux;
             this.setState({
                 positions: arrPosition,
-                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : 'null'
+                position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : 'null'
             })
         }
         if (prevProps.roleRedux !== this.props.roleRedux) {
             let arrRole = this.props.roleRedux;
             this.setState({
                 roles: arrRole,
-                role: arrRole && arrRole.length > 0 ? arrRole[0].key : 'null'
+                role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : 'null'
             })
         }
     }
@@ -89,6 +89,7 @@ class UserRedux extends Component {
         this.setState({
             ...copyState
         },)
+
     }
 
     validateInput = () => {
@@ -101,23 +102,26 @@ class UserRedux extends Component {
                 break
             }
         }
+        return isValid;
     }
 
-    handleSave = () => {
+    handleSave = async () => {
         let isValid = this.validateInput();
-        if (isValid === false) return;
-        this.props.createNewUser({
-            email: this.state.email,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            gender: this.state.gender,
-            address: this.state.address,
-            phone: this.state.phone,
-            roleId: this.state.role,
-            positionId: this.state.position,
-            image: this.state.image,
-        })
+        console.log(isValid);
+        if (isValid) {
+            await this.props.createNewUser({
+                email: this.state.email,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                gender: this.state.gender,
+                address: this.state.address,
+                phone: this.state.phone,
+                roleId: this.state.role,
+                positionId: this.state.position,
+                image: this.state.image,
+            })
+        }
     }
 
     render() {
@@ -179,7 +183,7 @@ class UserRedux extends Component {
                                             genders.map((item, index) => {
                                                 // console.log(item);
                                                 return (
-                                                    <option key={index} value={item.key}>
+                                                    <option key={index} value={item.keyMap}>
                                                         {language === LANGUAGES.VI ? item.value_vi : item.value_en}
                                                     </option>
                                                 )
@@ -194,7 +198,7 @@ class UserRedux extends Component {
                                             roles.map((item, index) => {
                                                 // console.log(item);
                                                 return (
-                                                    <option key={index} value={item.key}>
+                                                    <option key={index} value={item.keyMap}>
                                                         {language === LANGUAGES.VI ? item.value_vi : item.value_en}
                                                     </option>
                                                 )
@@ -209,7 +213,7 @@ class UserRedux extends Component {
                                             positions.map((item, index) => {
                                                 // console.log(item);
                                                 return (
-                                                    <option key={index} value={item.key}>
+                                                    <option key={index} value={item.keyMap}>
                                                         {language === LANGUAGES.VI ? item.value_vi : item.value_en}
                                                     </option>
                                                 )
@@ -230,7 +234,7 @@ class UserRedux extends Component {
 
                                 </div>
                                 <div className="col-12">
-                                    <button type="submit" className="btn btn-primary" onClick={() => { this.handleSave() }}><FormattedMessage id='form.save' /></button>
+                                    <button type="button" className="btn btn-primary" onClick={() => { this.handleSave() }}><FormattedMessage id='form.save' /></button>
                                 </div>
                             </form>
                             <div className="col-12">
@@ -269,6 +273,7 @@ const mapDispatchToProps = dispatch => {
         getPosition: () => dispatch(actions.fetchPositionStart()),
         getRole: () => dispatch(actions.fetchRoleStart()),
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        fetchAllUser: () => dispatch(actions.fetchAllUserStart()),
 
     };
 };

@@ -60,12 +60,6 @@ class App extends Component {
 
                         </div>
 
-                        {/* <ToastContainer
-                            className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
-                            autoClose={false} hideProgressBar={true} pauseOnHover={false}
-                            pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
-                        /> */}
                         <ToastContainer
                             position="bottom-right"
                             autoClose={4000}
@@ -75,7 +69,7 @@ class App extends Component {
                             rtl={false}
                             pauseOnFocusLoss
                             draggable
-                            pauseOnHover
+                            pauseOnHover={false}
                             theme="light"
                             transition={Bounce}
                         />

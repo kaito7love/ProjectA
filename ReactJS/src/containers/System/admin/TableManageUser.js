@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "./TableManageUser.scss";
 import { emitter } from "../../../utils/emitter";
 import { getAllUsers, createUserService, deleteUserService, editUserService, } from "../../../services/userService";
-import * as action from "../../../store/actions";
+import * as actions from "../../../store/actions";
 
 class TableManageUser extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class TableManageUser extends Component {
     }
 
     async componentDidMount() {
-        await this.props.fetchAllUser();
+        this.props.fetchAllUser();
     }
 
     componentDidUpdate(prevProps, prevStates, snapShot) {
@@ -28,19 +28,10 @@ class TableManageUser extends Component {
         }
 
     }
-     
+
     handleDeleteUser = async (user) => {
-        try {
-            let res = await deleteUserService(user.id);
-            if (res && res.errCode === 0) {
-                await this.props.fetchAllUser();
-            } else {
-                console.log(res.message.message);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-        // console.log("delete", user);
+        await this.props.deleteUser(user)
+
     };
 
     handleEditUser = (user) => {
@@ -116,7 +107,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAllUser: () => dispatch(action.fetchAllUserStart())
+        fetchAllUser: () => dispatch(actions.fetchAllUserStart()),
+        deleteUser: (data) => dispatch(actions.deleteUser(data))
     };
 };
 

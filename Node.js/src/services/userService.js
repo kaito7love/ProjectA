@@ -13,7 +13,7 @@ let handleUserLogin = (email, password) => {
             if (isExist) {
                 let user = await db.User.findOne({
                     where: { email: email },
-                    attributes: ["email", "roleId", "password","firstName",'lastName'],
+                    attributes: ["email", "roleId", "password", "firstName", 'lastName'],
                     raw: true,
                 });
                 if (user) {
@@ -200,6 +200,10 @@ let getAllCodeService = (typeInput) => {
         try {
             let message = {}
             if (!typeInput) {
+                // let allCodeData = await db.Allcode.findAll();
+                // message.errCode = 0;
+                // message.errMessage = "Get successful allcode data";
+                // message.data = allCodeData;
                 return res.status(200).json({
                     errCode: -1,
                     errMessage: "Missing Type Input"
@@ -218,11 +222,11 @@ let getAllCodeService = (typeInput) => {
         }
     })
 }
-module.exports = {
-    handleUserLogin: handleUserLogin,
-    getAllUsers: getAllUsers,
-    createUser: createUser,
-    deleteUser: deleteUser,
-    updateUserData: updateUserData,
-    getAllCodeService: getAllCodeService,
+export default {
+    handleUserLogin,
+    getAllUsers,
+    createUser,
+    deleteUser,
+    updateUserData,
+    getAllCodeService,
 };

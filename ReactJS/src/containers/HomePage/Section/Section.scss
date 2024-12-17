@@ -1,3 +1,8 @@
+*{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 .slick-prev,
 .slick-next {
     height: 40px;
@@ -38,24 +43,32 @@
 }
 
 .slider-img {
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: 120px;
     background-size: cover;
 }
 .slick-dots {
     list-style-type: none;
+}
+.slick-slide img {
+    display: inline;
 }
 
 .slider-items {
     display: flex !important;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .slider-text {
     font-size: 20px;
     font-weight: 500;
 }
+.slick-disabled {
+    display: none !important;
+}
+
 .section-background-specialty {
     // background-image: url("/images/140311-background5.png");
     padding: 5px 0;
@@ -100,7 +113,7 @@
 }
 
 .section-background-doctor {
-    // background-image: url("../../../../public/images/140311-background5.png");
+    background-image: url("/images/140311-background5.png");
     padding: 5px 0;
     .section-doctor {
         .section-content {
@@ -131,7 +144,8 @@
                 padding: 10px;
                 .slider-content {
                     text-align: center;
-                    .slider-img {
+                    .slider-img-doctor {
+                        // background-image: url("/images/104940-bs-vi.jpg");
                         border-radius: 50%;
                     }
                 }
