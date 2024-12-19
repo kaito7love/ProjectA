@@ -40,12 +40,17 @@
         padding-left: 5px;
     }
 }
+.markdown {
+    display: block;
+}
 .input-markdown {
-    width: 48%;
+    width: 50%;
+    margin-right:5px;
     height: 200px;
 }
 .output-markdown {
-    width: 48%;
+    width: 50%;
+    margin-left:5px;
     height: 200px;
     border: 1px solid black;
 }
@@ -53,4 +58,22 @@
     display: flex;
     padding-bottom: 10px;
     justify-content: space-between;
+}
+.markdown-info-left {
+    width: 50%;
+    margin-right:5px;
+}
+.markdown-info-right {
+    width: 50%;
+    margin-left:5px;
+}
+.input-info-left {
+    width: 100%;
+}
+.input-info-right {
+    width: 100%;
+}
+.markdown-doctor-detail {
+    display: flex;
+    padding: 10px 0;
 }

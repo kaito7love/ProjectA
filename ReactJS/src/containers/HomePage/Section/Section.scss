@@ -1,4 +1,3 @@
-
 .slick-prev,
 .slick-next {
     height: 40px;
@@ -55,6 +54,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    .slider-content {
+        cursor: pointer;
+    }
 }
 
 .slider-text {
@@ -140,6 +142,7 @@
                 padding: 10px;
                 .slider-content {
                     text-align: center;
+
                     .slider-img-doctor {
                         // background-image: url("/images/104940-bs-vi.jpg");
                         border-radius: 50%;
