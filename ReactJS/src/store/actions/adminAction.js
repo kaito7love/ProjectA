@@ -180,3 +180,115 @@ export const fetchTopDoctor = () => {
         }
     }
 }
+
+export const editUser = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            console.log("data from admin action", data);
+
+            let res = await userService.editUserService(data);
+            console.log(res);
+            if (res && res.errCode === 0) {
+                toast.success("Update User Successful !!!")
+                dispatch(editUserSuccess())
+                dispatch(fetchAllUserStart())
+            } else {
+                dispatch(dispatch(editUserFailed()))
+            }
+        } catch (error) {
+            console.log("EDIT_USER_FAILED", error);
+            dispatch(dispatch(editUserFailed()))
+        }
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS,
+})
+
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED,
+})
+
+
+export const fetchAllDoctor = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await userService.getAllDoctorService()
+            // console.log(res);
+
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+                    data: res.data
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTORS_FAILED,
+                })
+            }
+        } catch (error) {
+            console.log("FETCH_ALL_DOCTORS_FAILED", error);
+            dispatch({
+                type: actionTypes.FETCH_ALL_DOCTORS_FAILED,
+            })
+        }
+    }
+}
+
+
+export const saveInfoDoctor = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await userService.saveInfoDoctorService(data)
+            // console.log("from action",res);
+
+            if (res && res.errCode === 0) {
+                // console.log("Update Detail Doctor as", res);
+                toast.success("Update Detail Doctor Successful !!!")
+                dispatch({
+                    type: actionTypes.CREATE_INFO_DOCTORS_SUCCESS,
+                })
+            } else {
+                console.log("Update Detail Doctor Error", res);
+                toast.error("Update Detail Doctor Error !!!")
+                dispatch({
+                    type: actionTypes.CREATE_INFO_DOCTORS_FAILED,
+                })
+            }
+        } catch (error) {
+            console.log("Update Detail Doctor Error", error);
+            toast.error("Update Detail Doctor Error !!!")
+            dispatch({
+                type: actionTypes.CREATE_INFO_DOCTORS_FAILED,
+            })
+        }
+    }
+}
+
+
+export const fetchAllScheduleTime = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await userService.getAllCodeService('time')
+            // console.log("from action time" ,res);
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SCHEDULE_TIME_SUCCESS,
+                    dataTime: res.data
+                })
+            } else {
+                console.log("FETCH_ALL_SCHEDULE_TIME_FAILED", res);
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SCHEDULE_TIME_FAILED,
+                })
+            }
+        } catch (error) {
+            console.log("FETCH_ALL_SCHEDULE_TIME_FAILED", error);
+            dispatch({
+                type: actionTypes.FETCH_ALL_SCHEDULE_TIME_FAILED,
+            })
+        }
+    }
+}
+

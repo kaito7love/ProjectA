@@ -4,14 +4,7 @@ import Slider from "react-slick";
 import './Section.scss'
 import * as actions from '../../../store/actions'
 import { LANGUAGES } from '../../../utils'
-import img from './../../../images/doctor.png';
-
-const sliderData = [
-    { image: './images/104940-bs-vi.jpg', text: 'Doctor 1' },
-    { image: './images/104940-bs-vi.jpg', text: 'Doctor 2' },
-    { image: './images/104940-bs-vi.jpg', text: 'Doctor 3' },
-    // Add more items as needed
-];
+import { withRouter } from 'react-router-dom';
 
 
 class Doctor extends Component {
@@ -34,6 +27,13 @@ class Doctor extends Component {
             })
         }
     }
+    //access detail
+    handleViewDetailDoctor = (doctor) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-doctor/${doctor.id}`)
+        }
+
+    }
     render() {
         const settings = {
             dots: false,
@@ -47,7 +47,7 @@ class Doctor extends Component {
         let { language } = this.props
         // arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors)
         console.log(arrDoctors);
-        
+
         return (
             <div className='section-background-doctor'>
                 <div className='container' >
@@ -63,15 +63,14 @@ class Doctor extends Component {
                                 <Slider {...settings}>
                                     {arrDoctors && arrDoctors.length > 0 &&
                                         arrDoctors.map((item, index) => {
+                                            console.log(item);
 
-                                            const nameVi = `${item.positionData.value_vi}, ${item.firstName}, ${item.lastName}`;
+                                            const nameVi = `${item.positionData.value_vi}, ${item.lastName}, ${item.firstName}`;
                                             const nameEn = `${item.positionData.value_en}, ${item.firstName}, ${item.lastName}`;
-                                            console.log(nameVi);
                                             return (
-                                                <div key={index} className='slider-items'>
+                                                <div key={index} className='slider-items' onClick={() => this.handleViewDetailDoctor(item)}>
                                                     <div className='slider-content'>
                                                         <img src={item.image} alt={item.text} className='slider-img' />
-                                                        <div className='slider-img-doctor'></div>
                                                         <div className='slider-text'>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
                                                         <div className='slider-text'>Chuyen khoa</div>
                                                     </div>
@@ -106,4 +105,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));

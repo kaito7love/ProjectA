@@ -6,7 +6,9 @@ const initialState = {
     roles: [],
     positions: [],
     users: [],
-    topDoctors: []
+    topDoctors: [],
+    allDoctors: [],
+    allSchedules: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -68,14 +70,39 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
 
-            case actionTypes.FETCH_TOP_DOCTORS_SUCCESS:
-                state.topDoctors = action.data
+        case actionTypes.FETCH_TOP_DOCTORS_SUCCESS:
+            state.topDoctors = action.data
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_TOP_DOCTORS_FAILED:
+            state.topDoctors = []
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_DOCTORS_SUCCESS:
+            state.allDoctors = action.data
+            // console.log("from reducer",state.allDoctors);            
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_DOCTORS_FAILED:
+            state.allDoctors = []
+            return {
+                ...state,
+            }
+
+            case actionTypes.FETCH_ALL_SCHEDULE_TIME_SUCCESS:
+                state.allSchedules = action.dataTime         
                 return {
                     ...state,
                 }
     
-            case actionTypes.FETCH_TOP_DOCTORS_FAILED:
-                state.topDoctors = []
+            case actionTypes.FETCH_ALL_SCHEDULE_TIME_FAILED:
+                state.allSchedules = []
                 return {
                     ...state,
                 }

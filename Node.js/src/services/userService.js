@@ -101,7 +101,7 @@ const createUser = (data) => {
             } else {
                 // note check type @gmail.com before create
                 let hashPasswordBcrypt = await hashUserPassword(data.password);
-                await db.User.create({
+                let user = await db.User.create({
                     email: data.email,
                     password: hashPasswordBcrypt,
                     firstName: data.firstName,
@@ -111,11 +111,12 @@ const createUser = (data) => {
                     phone: data.phone,
                     roleId: data.roleId,
                     positionId: data.positionId,
-                    image: data.image,
+                    image: data.gender === "M" ? "/images/doctor.png" : data.gender === "F" ? "/images/doctor2.png" : "",
                 });
                 resolve({
                     errCode: 0,
                     message: "Create user successful",
+                    data: user
                 });
             }
             console.log("data from userService Backend: ", data);
@@ -179,6 +180,10 @@ let updateUserData = (data) => {
                 user.lastName = data.lastName;
                 user.address = data.address;
                 user.phone = data.phone;
+                user.gender = data.gender;
+                user.roleId = data.roleId;
+                user.positionId = data.positionId;
+                user.image = data.image;
                 await user.save();
 
                 resolve({

@@ -45,7 +45,7 @@ class Login extends Component {
                 });
             }
             if (data && data.errCode === 0) {
-                this.props.userLoginSuccess(data.user); 
+                this.props.userLoginSuccess(data.user);
                 console.log("login success");
             }
         } catch (error) {
@@ -79,6 +79,11 @@ class Login extends Component {
                                     onChange={(event) => {
                                         this.handleOnChangeUsername(event);
                                     }}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Enter') {
+                                            this.handleLogin();
+                                        }
+                                    }}
                                 ></input>
                             </div>
                             <div className="col-12 form-group login-input">
@@ -91,6 +96,11 @@ class Login extends Component {
                                     onChange={(event) => {
                                         this.handleOnChangePassword(event);
                                     }}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Enter') {
+                                            this.handleLogin();
+                                        }
+                                    }}
                                 ></input>
                             </div>
                             <div className="col-12" style={{ color: "red" }}>
@@ -101,6 +111,11 @@ class Login extends Component {
                                     className="btn-login"
                                     onClick={() => {
                                         this.handleLogin();
+                                    }}
+                                    onKeyDown={(event) => {
+                                        if (event.key === 'Enter') {
+                                            this.handleLogin();
+                                        }
                                     }}
                                 >
                                     Login
@@ -136,7 +151,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
-        
+
         // userLoginFail: () => dispatch(actions.adminLoginFail()),
         userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };

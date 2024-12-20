@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import Slider from "react-slick";
 import './Section.scss'
 
-// import img from './../../../images/101627-co-xuong-khop.png';
-
-
 
 class Specialty extends Component {
 

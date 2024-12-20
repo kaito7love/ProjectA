@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import Slider from "react-slick";
 import './Section.scss'
 
-// import img from './../../../images/160857-791310225786250729637925205413557167980544o.jpg';
-
-
 class MedicalFacility extends Component {
 
     render() {
@@ -31,19 +28,19 @@ class MedicalFacility extends Component {
                                 <Slider {...settings}>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
+                                            <img src="./images/doctor.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
+                                            <img src="./images/doctor.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
+                                            <img src="/images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
                                             <div className='slider-text'>Cơ Xương Khớp 2</div>
                                         </div>
                                     </div>

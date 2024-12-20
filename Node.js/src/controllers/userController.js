@@ -10,7 +10,7 @@ let handleLogin = async (req, res) => {
     if (!email || !password) {
         return res.status(500).json({
             errorCode: 1,
-            message: "Wrong input!",
+            message: "Invalid login, please try again!",
         });
     }
     let userData = await userService.handleUserLogin(email, password);

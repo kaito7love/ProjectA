@@ -20,7 +20,7 @@ class SocialMedia extends Component {
                             </div>
                             <div className="social-right">
                                 <div className='media-left'>
-                                    <img src='./images/vnexpress.png' className='slider-img'></img>
+                                    <img src='/images/vnexpress.png' className='slider-img'></img>
                                 </div>
                                 <div className='media-right'>
                                     {/* <img src={img} className='slider-img'></img> */}

@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./HomeHeader.scss";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../../utils";
 import { changeLanguageApp } from "../../../store/actions";
+import { Link } from "react-router-dom";
+
+import "./HomeHeader.scss";
+import SearchBar from "../Search/SearchBar";
+import { withRouter } from "react-router-dom";
+
 
 class HomeHeader extends Component {
     changeLanguage = (language) => {
@@ -11,21 +16,30 @@ class HomeHeader extends Component {
         this.props.changeLanguageAppRedux(language);
     };
 
-
+    handleSearch = (query) => {
+        console.log("Searching for:", query);
+        // Thực hiện logic tìm kiếm ở đây
+    };
 
     // make color
-    // componentDidMount() {
-    //     const script = document.createElement("script");
-    //     script.src = "https://static.elfsight.com/platform/platform.js";
-    //     script.async = true;
-    //     script.onload = () => {
-    //         this.changeLanguage(this.props.lang)
-    //         this.setState({ scriptLoaded: true });
-    //         console.log("Loading :", this.props.lang);
-    //         console.log("Elfsight script loaded.");
-    //     };
-    //     document.body.appendChild(script);
-    // }
+    componentDidMount() {
+        const script = document.createElement("script");
+        script.src = "https://static.elfsight.com/platform/platform.js";
+        script.async = true;
+        script.onload = () => {
+            this.changeLanguage(this.props.lang)
+            this.setState({ scriptLoaded: true });
+            console.log("Loading :", this.props.lang);
+            console.log("Elfsight script loaded.");
+        };
+        document.body.appendChild(script);
+    }
+    returnHome = () => {
+        if (this.props.history) {
+            this.props.history.push(`/home`)
+        }
+
+    }
     render() {
         let language = this.props.lang;
         return (
@@ -35,7 +49,8 @@ class HomeHeader extends Component {
                         <div className="header-bar">
                             <i class="fas fa-bars"></i>
                         </div>
-                        <div className="header-logo"></div>
+                        <div className="header-logo" onClick={() => this.returnHome()}></div>
+
                         {/* <div>Booking Care</div> */}
                     </div>
                     <div className="mid-content">
@@ -68,7 +83,8 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                         <div className="header-service header-search-box">
-                            search
+                            Search
+                            {/* <SearchBar onSearch={this.handleSearch()} /> */}
                         </div>
                     </div>
                     <div className="right-content">
@@ -86,12 +102,12 @@ class HomeHeader extends Component {
                                 </p>
                             </div>
                         </div>
-                        {/* <div className="make-color">
+                        <div className="make-color">
                             <div
                                 className="elfsight-app-eb02f6eb-0039-4a52-b932-28e9a5de5b9d"
                                 data-elfsight-app-lazy
                             ></div>
-                        </div> */}
+                        </div>
                         <div className="header-language">
                             <div className="language">
                                 <div className={language === LANGUAGES.VI ? "Vie action" : "Vie"}>
@@ -128,5 +144,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
 

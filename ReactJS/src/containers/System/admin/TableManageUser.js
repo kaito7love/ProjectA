@@ -41,7 +41,8 @@ class TableManageUser extends Component {
     };
 
     handleEditUser = (user) => {
-        console.log("edit by id:", user.id);
+        console.log("edit by id:", user);
+        this.props.handleEditUsers(user)
     };
 
 
@@ -102,11 +103,6 @@ class TableManageUser extends Component {
                         </table>
                     </div>
 
-                </div>
-                <div>
-                    <>
-
-                    </>
                 </div>
             </React.Fragment>
 
