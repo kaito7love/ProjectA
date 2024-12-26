@@ -36,7 +36,7 @@ let handleGetAllUser = async (req, res) => {
 
 let handleCreateUser = async (req, res) => {
     let message = await userService.createUser(req.body);
-    console.log("be", message);
+    // console.log("be", message);
     return res.status(200).json(
         message
     );

@@ -83,7 +83,6 @@ class HomeHeader extends Component {
                             </div>
                         </div>
                         <div className="header-service header-search-box">
-                            Search
                             {/* <SearchBar onSearch={this.handleSearch()} /> */}
                         </div>
                     </div>

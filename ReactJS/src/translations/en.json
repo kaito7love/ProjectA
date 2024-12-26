@@ -38,6 +38,12 @@
             "manage-specialty": "Manage Specialty",
             "blog": "Blog",
             "manage-blog": "Manage Blog"
+        },
+        "doctor": {
+            "manage-schedule": "Manage schedule",
+            "choose-doctor": "Choose Doctor",
+            "choose-date": "Choose Date",
+            "Save": "Save"
         }
     },
     "form": {
@@ -61,5 +67,29 @@
         "choose-doctor": "Choose Doctor",
         "choose-date": "Choose Date",
         "Save": "Save"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Schedule Time",
+            "schedule-none": "The doctor does not have appointments available during this time, please choose another time.",
+            "text-first": "Choose ",
+            "text-last": " and book (Free)"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create Information Doctors",
+            "choose-doctor": "Choose Doctor",
+            "doctor-info": "Doctor introduction",
+            "more-articles": "More articles",
+            "save": "Save",
+            "add": "Create",
+            "price":"Price",
+            "payment":"Payment",
+            "province":"Province",
+            "nameClinic":"Clinic's Name",
+            "addressClinic":"Clinic's Address",
+            "note":"Note"
+        }
     }
 }

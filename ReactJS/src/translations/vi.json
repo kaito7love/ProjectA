@@ -1,25 +1,23 @@
 {
     "home-header": {
-        "all": "Tất Cả",
-        "support": "Hỗ Trợ",
-        "appointment": "Lịch Hẹn",
-        "welcome": "Xin Chào, "
+        "all": "Tất cả",
+        "support": "Hỗ trợ",
+        "appointment": "Lịch hẹn",
+        "welcome": "Chào mừng, "
     },
-
     "login": {
         "login": "Đăng nhập",
         "username": "Tên đăng nhập",
         "password": "Mật khẩu",
-        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
+        "userpass-wrong": "Tên đăng nhập hoặc mật khẩu không đúng!"
     },
-
     "menu": {
         "system": {
             "header": "Hệ thống",
             "system-administrator": {
                 "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "user-redux": "Quản lý người sử dụng Redux",
+                "user-manage": "Quản lý người dùng",
+                "user-redux": "Quản lý người dùng redux",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },
             "system-parameter": {
@@ -28,23 +26,22 @@
         },
         "admin": {
             "user": "Người dùng",
-            "manage-user": "Quản lý người dùng",
+            "manage-user": "Quản lý Người dùng",
             "manage-admin": "Quản lý Admin",
             "manage-doctor": "Quản lý Bác sĩ",
-            "crud-user": "crud user",
+            "crud-user": "crud người dùng",
             "crud-redux": "crud admin",
             "clinic": "Phòng khám",
-            "manage-clinic": "Quản lý phòng khám",
-            "specialty": "Chuyên Khoa",
-            "manage-specialty": "Chuyên Khoa",
-            "blog": "Cẩm nang",
-            "manage-blog": "Quản lý cẩm nang"
+            "manage-clinic": "Quản lý Phòng khám",
+            "specialty": "Chuyên khoa",
+            "manage-specialty": "Quản lý Chuyên khoa",
+            "blog": "Blog",
+            "manage-blog": "Quản lý Blog"
         },
         "doctor": {
-            "manage-schedule": "Quản lý lịch hẹn"
+            "manage-schedule": "Quản lý Lịch làm việc"
         }
     },
-
     "form": {
         "email": "Email",
         "password": "Mật khẩu",
@@ -54,11 +51,41 @@
         "phone": "Số điện thoại",
         "gender": "Giới tính",
         "role": "Vai trò",
-        "position": "Chức danh",
-        "image": "Ảnh",
-        "imageLoad":"Tải ảnh",
-        "create": "Tạo người dùng",
-        "edit" : "Lưu thay đổi"
+        "position": "Chức vụ",
+        "image": "Hình ảnh",
+        "imageLoad": "Tải ảnh lên",
+        "create": "Tạo Người dùng",
+        "edit": "Lưu thay đổi",
+        "create-detail": "Tạo Thông tin"
+    },
+    "doctor": {
+        "manage-schedule": "Quản lý lịch làm việc",
+        "choose-doctor": "Chọn Bác sĩ",
+        "choose-date": "Chọn Ngày",
+        "Save": "Lưu"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Thời gian Lịch hẹn",
+            "schedule-none": "Bác sĩ không có lịch hẹn vào thời gian này, vui lòng chọn thời gian khác.",
+            "text-first": "Chọn ",
+            "text-last": " và đặt lịch (Miễn phí)"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Tạo Thông tin Bác sĩ",
+            "choose-doctor": "Chọn Bác sĩ",
+            "doctor-info": "Giới thiệu về Bác sĩ",
+            "more-articles": "Thêm bài viết",
+            "save": "Lưu",
+            "add": "Tạo mới",
+            "price": "Giá",
+            "payment": "Thanh toán",
+            "province": "Tỉnh/Thành phố",
+            "nameClinic": "Tên Phòng khám",
+            "addressClinic": "Địa chỉ Phòng khám",
+            "note": "Ghi chú"
+        }
     }
-
 }

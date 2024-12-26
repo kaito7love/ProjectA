@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/Header/HomeHeader';
 import HomeFooter from '../../HomePage/Footer/HomeFooter';
 import './DetailDoctor.scss'
-import AppointmentSchedule from './AppointmentSchedule';
 import { getDetailDoctorService } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
+import DoctorSchedule from './DoctorSchedule';
+import DoctorExtraInfo from './DoctorExtraInfo';
 
 
 
@@ -13,13 +14,17 @@ class DetailDoctor extends Component {
     constructor(props) {
         super(props)
         this.state = ({
-            detailDoctor: {}
+            detailDoctor: {},
+            currentDoctorId: -1,
         })
     }
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
+            this.setState({
+                currentDoctorId: id
+            })
             let res = await getDetailDoctorService(id)
 
             if (res && res.errCode === 0) {
@@ -27,7 +32,7 @@ class DetailDoctor extends Component {
                     detailDoctor: res.data
                 })
             }
-            console.log(this.state.detailDoctor);
+            // console.log(this.state.detailDoctor);
 
         }
     }
@@ -36,44 +41,56 @@ class DetailDoctor extends Component {
 
     }
     render() {
-        console.log(this.props.match.params.id);
-        let item = this.state.detailDoctor;
+        // console.log(this.props.match.params.id);
+        let detailDoctor = this.state.detailDoctor;
         let nameVi, nameEn;
 
-        if (item && item.positionData) {
-            nameVi = `${item.positionData.value_vi}, ${item.lastName} ${item.firstName}`;
-            nameEn = `${item.positionData.value_en}, ${item.firstName} ${item.lastName}`;
+        if (detailDoctor && detailDoctor.positionData) {
+            nameVi = `${detailDoctor.positionData.value_vi}, ${detailDoctor.lastName} ${detailDoctor.firstName}`;
+            nameEn = `${detailDoctor.positionData.value_en}, ${detailDoctor.firstName} ${detailDoctor.lastName}`;
         }
         let { language } = this.props
         return (
             <React.Fragment>
                 <HomeHeader />
                 <div className='container'>
-                    <div className="DetailDoctor">
+                    <div className="Detail-Doctor">
                         <div className="doctor-info">
                             <img
-                                src={item.image}
+                                src={detailDoctor.image}
                                 alt="Doctor"
                                 className="doctor-image"
                             />
                             <div className="doctor-description">
                                 <h2>{language === LANGUAGES.VI ? nameVi : nameEn}</h2>
-                                {item && item.Markdown && item.Markdown.description &&
-                                    <span>{item.Markdown.description}</span>}
+                                {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&
+                                    <span>{detailDoctor.Markdown.description}</span>}
                             </div>
-
                         </div>
+                        <div className='doctor-content'>
+                            <div className='doctor-right-content'>
+                                <div className='doctor-schedule'>
+                                    <DoctorSchedule
+                                        currentDoctorId={this.state.currentDoctorId}
+                                    />
+                                </div>
+                            </div>
+                            <div className='doctor-left-content'>
+                                <div className='doctor-extra-info'>
+                                    <DoctorExtraInfo
+                                        currentDoctorId={this.state.currentDoctorId}
+                                    />
+                                </div>
 
-
+                            </div>
+                        </div>
                     </div>
-                    {/* <AppointmentSchedule /> */}
-
                 </div>
                 <div className='doctor-details-background'>
                     <div className='container'>
                         <div className="doctor-details">
-                            {item && item.Markdown && item.Markdown.contentHTML &&
-                                <div dangerouslySetInnerHTML={{ __html: item.Markdown.contentHTML }}></div>
+                            {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
+                                <div dangerouslySetInnerHTML={{ __html: detailDoctor.Markdown.contentHTML }}></div>
                             }
                         </div>
                     </div>

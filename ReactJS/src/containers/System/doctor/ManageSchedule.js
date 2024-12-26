@@ -12,6 +12,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { saveBulkScheduleDoctor } from '../../../services/userService'
 
+
 class ManageSchedule extends Component {
     constructor(props) {
         super(props);
@@ -67,15 +68,16 @@ class ManageSchedule extends Component {
             return
         }
 
+        console.log(currentDate);
+
         // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
         let formatedDate = new Date(currentDate).getTime()
-
 
         if (scheduleTime && scheduleTime.length > 0) {
             let selectedTime = scheduleTime.filter(item => item.isSelected === true)
             if (selectedTime && selectedTime.length > 0) {
                 selectedTime.map((item, index) => {
-                    let object = [];
+                    let object = {};
                     object.doctorId = selectedDoctor.value
                     object.date = formatedDate
                     object.timeType = item.keyMap
@@ -86,12 +88,19 @@ class ManageSchedule extends Component {
                 return
             }
         }
+        console.log("from ract", formatedDate);
         let res = await saveBulkScheduleDoctor({
             arrSchedule: result,
-            doctorId: selectedDoctor,
-            formatedDate: formatedDate
+            doctorId: selectedDoctor.value,
+            formatedDate: +formatedDate
         })
-        console.log(res);
+        if (res && res.errCode === 0) {
+            toast.success("Save info successful!")
+        } else{
+            toast.error("Save info error!")
+        }
+
+        console.log("from ract", res);
 
     }
     handleChange = async (selectedDoctor) => {
@@ -128,6 +137,7 @@ class ManageSchedule extends Component {
         // console.log("log props", this.props);
         let { scheduleTime } = this.state
         let { language } = this.props
+        let today = new Date(new Date().setDate(new Date().getDate()));
         return (
             <div className="container">
                 <div className="title"><FormattedMessage id="doctor.manage-schedule" /></div>
@@ -147,9 +157,8 @@ class ManageSchedule extends Component {
                             <DatePicker
                                 className='form-control'
                                 onChange={this.handleChangeDataPicker}
-                                // value={this.state.currentDate}
                                 selected={this.state.currentDate}
-                                minDate={new Date()}
+                                minDate={today}
                             />
                         </div>
 
