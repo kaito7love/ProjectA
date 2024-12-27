@@ -23,6 +23,7 @@ h2 {
     color        : #333;
     margin-bottom: 10px;
 }
+
 .note,
 .clinic-name,
 .clinic-address,
@@ -31,21 +32,27 @@ h2 {
 .payment-methods,
 .insurance-label,
 .insurance-detail {
-    font-size: 14px;
-    color    : #555;
-    margin   : 5px 0;
+    font-size   : 14px;
+    color       : #555;
+    margin      : 5px 0;
     padding-left: 5px;
 }
 
+.clinic-name,
+.clinic-address,
+.clinic-title {
+    font-weight: 600;
+}
+
 .price-value {
-    font-weight: bold;
+    font-weight      : bold;
     // color      : #28a745;
-    float: right;
-    padding-right: 5px;
+    // float         : right;
+    padding-right    : 5px;
 }
 
 .payment-methods {
-    font-style: italic;
+    font-style      : italic;
     border          : 1px solid rgb(186, 186, 186);
     background-color: #c7c7c7;
 }
@@ -67,10 +74,11 @@ a:hover {
 
 .section {
     .toggle {
-     color: #007bff;
-     cursor: pointer;
+        color : #007bff;
+        cursor: pointer;
     }
 }
-.doctor-left-content{
+
+.doctor-left-content {
     width: 100%;
 }

@@ -72,7 +72,6 @@ class UserManage extends Component {
                 });
                 emitter.emit("EVENT_CLEAR_MODAL_DATA");
             }
-            console.log("data from uMange", res);
         } catch (error) {
             console.log(error);
         }

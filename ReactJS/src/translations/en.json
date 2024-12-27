@@ -40,7 +40,8 @@
             "manage-blog": "Manage Blog"
         },
         "doctor": {
-            "manage-schedule": "Manage schedule",
+            "manage-schedule": "Manage Schedule",
+            "manage-patient": "Manage patient",
             "choose-doctor": "Choose Doctor",
             "choose-date": "Choose Date",
             "Save": "Save"
@@ -56,14 +57,15 @@
         "gender": "Gender",
         "role": "Role",
         "position": "Position",
-        "image": "Image",
+        "image": "Image:",
         "imageLoad": "Upload Image",
         "create": "Create User",
         "edit": "Save Changes",
         "create-detail": "Create Information"
     },
     "doctor": {
-        "manage-schedule": "Manage schedule",
+        "manage-schedule": "Manage Schedule",
+        "manage-patient": "Manage patient",
         "choose-doctor": "Choose Doctor",
         "choose-date": "Choose Date",
         "Save": "Save"
@@ -74,6 +76,14 @@
             "schedule-none": "The doctor does not have appointments available during this time, please choose another time.",
             "text-first": "Choose ",
             "text-last": " and book (Free)"
+        },
+        "extra": {
+            "clinic-address": "CLINIC ADDRESS",
+            "price": "Medical examination price: ",
+            "note": "Note: ",
+            "payment": "The clinic has the following payment methods: ",
+            "more": "More",
+            "close": "Close"
         }
     },
     "admin": {
@@ -84,12 +94,26 @@
             "more-articles": "More articles",
             "save": "Save",
             "add": "Create",
-            "price":"Price",
-            "payment":"Payment",
-            "province":"Province",
-            "nameClinic":"Clinic's Name",
-            "addressClinic":"Clinic's Address",
-            "note":"Note"
+            "price": "Price",
+            "payment": "Payment",
+            "province": "Province",
+            "nameClinic": "Clinic's Name",
+            "addressClinic": "Clinic's Address",
+            "note": "Note"
+        },
+        "manage-specialty": {
+            "title": "Manage Specialty",
+            "choose-specialty": "Choose Specialty",
+            "specialty-description": "Specialty description",
+            "more-articles": "More articles",
+            "save": "Save",
+            "add": "Create"
         }
+    },
+    "home-page": {
+        "doctor": "Doctors",
+        "specialty": "Specialties",
+        "facility": "Facilities",
+        "social-media": "SocialMedia, "
     }
 }

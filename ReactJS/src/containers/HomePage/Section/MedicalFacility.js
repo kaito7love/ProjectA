@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from "react-slick";
 import './Section.scss'
-
+import { FormattedMessage } from "react-intl";
 class MedicalFacility extends Component {
 
     render() {
@@ -10,7 +10,7 @@ class MedicalFacility extends Component {
             dots: false,
             infinite: false,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: 4,
             slidesToScroll: 2
         }
         return (
@@ -18,7 +18,7 @@ class MedicalFacility extends Component {
                 <div className='container' >
                     <div className='section-medicalFacility'>
                         <div className='section-content'>
-                            <p className='section-text'>Cơ Sở Y Tế</p>
+                            <p className='section-text'><FormattedMessage id="home-page.facility" /></p>
                             <button className='section-btn'>
                                 Xem Thêm
                             </button>
@@ -28,34 +28,35 @@ class MedicalFacility extends Component {
                                 <Slider {...settings}>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/doctor.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
+                                            <img src="./images/160857-791310225786250729637925205413557167980544o.jpg" alt="React Image" className='slider-img' />
+                                            <div className='slider-text'>Y Học Cổ Truyền</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/doctor.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
+                                            <img src="./images/160857-791310225786250729637925205413557167980544o.jpg" alt="React Image" className='slider-img' />
+                                            <div className='slider-text'>Y Học Cổ Truyền</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="/images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
+                                            <img src="/images/160857-791310225786250729637925205413557167980544o.jpg" alt="React Image" className='slider-img' />
+                                            <div className='slider-text'>Y Học Cổ Truyền</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
+                                            <img src="./images/160857-791310225786250729637925205413557167980544o.jpg" alt="React Image" className='slider-img' />
+                                            <div className='slider-text'>Y Học Cổ Truyền</div>
                                         </div>
                                     </div>
                                     <div className='slider-items'>
                                         <div className='slider-content'>
-                                            <img src="./images/doctor.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
+                                            <img src="./images/160857-791310225786250729637925205413557167980544o.jpg" alt="React Image" className='slider-img' />
+                                            <div className='slider-text'>Y Học Cổ Truyền</div>
                                         </div>
                                     </div>
+
                                 </Slider>
                             </div>
                         </div>

@@ -246,7 +246,7 @@ class ModalCreateUser extends Component {
                                         >
                                             <option value="1">Admin</option>
                                             <option value="2">Doctor</option>
-                                            
+
                                         </select>
                                     </div>
                                 </div>

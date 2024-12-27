@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import './DoctorExtraInfo.scss'
 import { LANGUAGES } from '../../../utils';
 import { getExtraInfoDoctorById } from '../../../services/userService'
+import { NumericFormat } from 'react-number-format';
+import { FormattedMessage } from "react-intl";
 
 class DoctorExtraInfo extends Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class DoctorExtraInfo extends Component {
     async componentDidMount() {
 
         let res = await getExtraInfoDoctorById(this.props.currentDoctorId)
-        console.log(res);
+        // console.log(res);
 
         if (res && res.errCode === 0) {
             this.setState({
@@ -58,7 +60,7 @@ class DoctorExtraInfo extends Component {
                 <div className="clinic-info">
                     {/* Address Section */}
                     <div className="section">
-                        <h2>ĐỊA CHỈ KHÁM</h2>
+                        <h2 className='clinic-title'><FormattedMessage id="patient.extra.clinic-address" /></h2>
                         <p className="clinic-name">
                             {extraDoctorData && extraDoctorData.nameClinic ? extraDoctorData.nameClinic : ""}
                         </p>
@@ -66,30 +68,69 @@ class DoctorExtraInfo extends Component {
                             {extraDoctorData && extraDoctorData.addressClinic ? extraDoctorData.addressClinic : ""}
                         </p>
                     </div>
-
                     {isShowPriceInfo === false &&
                         <div className="section">
-                            <h2>GIÁ KHÁM:
+                            <h2><FormattedMessage id="patient.extra.price" />
                                 <span className="price-value">
-                                {extraDoctorData && extraDoctorData.priceTypeData ? extraDoctorData.priceTypeData.value_vi : ""}
+                                    {extraDoctorData && extraDoctorData.priceTypeData && language === LANGUAGES.VI
+                                        && <NumericFormat
+                                            value={extraDoctorData.priceTypeData.value_vi}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix=' VND'
+                                        />}
+                                    {extraDoctorData && extraDoctorData.priceTypeData && language === LANGUAGES.EN
+                                        && <NumericFormat
+                                            value={extraDoctorData.priceTypeData.value_en}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            prefix='$ '
+                                        />}
                                 </span>
                             </h2>
-                            <span class="toggle" onClick={(status) => this.showDetailInfo(true)}>Xem thêm</span>
+                            <span class="toggle" onClick={(status) => this.showDetailInfo(true)}><FormattedMessage id="patient.extra.more" /></span>
                         </div>
                     }
                     {isShowPriceInfo === true &&
                         <div className="section">
-                            <h2>GIÁ KHÁM:</h2>
+                            <h2><FormattedMessage id="patient.extra.price" /></h2>
                             <div className='section-price'>
-                                <span className="price-label">Giá khám :  </span>
-                                <span className="price-value"> {extraDoctorData && extraDoctorData.priceTypeData ? extraDoctorData.priceTypeData.value_vi : ""}</span>
-                                <div className='note'>{extraDoctorData && extraDoctorData.note ? extraDoctorData.note : ""}</div>
+                                <span className="price-label"><FormattedMessage id="patient.extra.price" />  </span>
+                                <span className="price-value">
 
+                                    {extraDoctorData && extraDoctorData.priceTypeData && language === LANGUAGES.VI
+                                        && <NumericFormat
+                                            value={extraDoctorData.priceTypeData.value_vi}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            suffix=' VND'
+                                        />}
+                                    {extraDoctorData && extraDoctorData.priceTypeData && language === LANGUAGES.EN
+                                        && <NumericFormat
+                                            value={extraDoctorData.priceTypeData.value_en}
+                                            displayType='text'
+                                            thousandSeparator=","
+                                            prefix='$ '
+                                        />}
+                                </span>
+                                {/* <div className='note'><FormattedMessage id="patient.extra.note" />{extraDoctorData && extraDoctorData.note ? extraDoctorData.note : ""}</div> */}
+                                <div className='note'>{extraDoctorData && extraDoctorData.note && (
+                                    <div className=''>
+                                        <FormattedMessage id="patient.extra.note" />
+                                        {extraDoctorData.note}
+                                    </div>
+                                )}
+                                </div>
                                 <div className="payment-methods">
-                                {extraDoctorData && extraDoctorData.paymentTypeData ? extraDoctorData.paymentTypeData.value_vi : ""}
+                                    <FormattedMessage id="patient.extra.payment" />
+                                    {extraDoctorData && extraDoctorData.priceTypeData && language === LANGUAGES.VI
+                                        && extraDoctorData.paymentTypeData.value_vi}
+                                    {extraDoctorData && extraDoctorData.priceTypeData && language === LANGUAGES.EN
+                                        && extraDoctorData.paymentTypeData.value_en}
+
                                 </div>
                             </div>
-                            <span class="toggle" onClick={(status) => this.showDetailInfo(false)}>Thu gọn</span>
+                            <span class="toggle" onClick={(status) => this.showDetailInfo(false)}><FormattedMessage id="patient.extra.close" /></span>
                         </div>
                     }
                 </div>

@@ -5,6 +5,7 @@ import './Section.scss'
 import * as actions from '../../../store/actions'
 import { LANGUAGES } from '../../../utils'
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 
 class Doctor extends Component {
@@ -53,7 +54,7 @@ class Doctor extends Component {
                 <div className='container' >
                     <div className='section-doctor'>
                         <div className='section-content'>
-                            <p className='section-text'>Bác Sĩ Nổi Bật</p>
+                        <p className='section-text'><FormattedMessage id="home-page.doctor" /></p>
                             <button className='section-btn'>
                                 Xem Thêm
                             </button>
@@ -72,7 +73,7 @@ class Doctor extends Component {
                                                     <div className='slider-content'>
                                                         <img src={item.image} alt={item.text} className='slider-img' />
                                                         <div className='slider-text'>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
-                                                        <div className='slider-text'>Chuyen khoa</div>
+                                                        {/* <div className='slider-text'>Chuyen khoa</div> */}
                                                     </div>
                                                 </div>
                                             )

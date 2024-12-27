@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Section.scss'
-
+import { FormattedMessage } from "react-intl";
 class SocialMedia extends Component {
 
 
@@ -11,7 +11,7 @@ class SocialMedia extends Component {
                 <div className='container'>
                     <div className='section-social'>
                         <div className='section-content'>
-                            <p className='section-text'>Truyền thông nói về BookingCare</p>
+                            <p className='section-text'><FormattedMessage id="home-page.social-media" /></p>
                         </div>
                         <div className='section-body'>
                             <div className="social-left">

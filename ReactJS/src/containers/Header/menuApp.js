@@ -24,21 +24,21 @@ export const adminMenu = [
     { //Manage clinic
         name: 'menu.admin.clinic', menus: [
             {
-                name: 'menu.admin.manage-clinic', link: '/system/clinic-manage'
+                name: 'menu.admin.manage-clinic', link: '/system/manage-clinic'
             },
         ]
     },
     { //Manage specialty
         name: 'menu.admin.specialty', menus: [
             {
-                name: 'menu.admin.manage-specialty', link: '/system/specialty-manage'
+                name: 'menu.admin.manage-specialty', link: '/system/manage-specialty'
             },
         ]
     },
     { //Manage blog
         name: 'menu.admin.blog', menus: [
             {
-                name: 'menu.admin.manage-blog', link: '/system/blog-manage'
+                name: 'menu.admin.manage-blog', link: '/system/manage-blog'
             },
         ]
     },
@@ -51,7 +51,9 @@ export const doctorMenu = [
         menus: [
             {
                 name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
-
+            },
+            {
+                name: 'menu.doctor.manage-patient', link: '/doctor/manage-patient'
             },
 
         ]

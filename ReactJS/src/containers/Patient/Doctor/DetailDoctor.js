@@ -7,7 +7,7 @@ import { getDetailDoctorService } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfo from './DoctorExtraInfo';
-
+import ProfileDoctor from './ProfileDoctor';
 
 
 class DetailDoctor extends Component {
@@ -43,30 +43,18 @@ class DetailDoctor extends Component {
     render() {
         // console.log(this.props.match.params.id);
         let detailDoctor = this.state.detailDoctor;
-        let nameVi, nameEn;
 
-        if (detailDoctor && detailDoctor.positionData) {
-            nameVi = `${detailDoctor.positionData.value_vi}, ${detailDoctor.lastName} ${detailDoctor.firstName}`;
-            nameEn = `${detailDoctor.positionData.value_en}, ${detailDoctor.firstName} ${detailDoctor.lastName}`;
-        }
         let { language } = this.props
         return (
             <React.Fragment>
                 <HomeHeader />
+
                 <div className='container'>
                     <div className="Detail-Doctor">
-                        <div className="doctor-info">
-                            <img
-                                src={detailDoctor.image}
-                                alt="Doctor"
-                                className="doctor-image"
-                            />
-                            <div className="doctor-description">
-                                <h2>{language === LANGUAGES.VI ? nameVi : nameEn}</h2>
-                                {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&
-                                    <span>{detailDoctor.Markdown.description}</span>}
-                            </div>
-                        </div>
+                        <ProfileDoctor
+                            doctorId={this.state.currentDoctorId}
+                            isShowDescription={true}
+                        />
                         <div className='doctor-content'>
                             <div className='doctor-right-content'>
                                 <div className='doctor-schedule'>

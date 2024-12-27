@@ -304,6 +304,7 @@ let getScheduleByDate = (doctorId, date) => {
                     where: { doctorId: doctorId, date: date },
                     include: [
                         { model: db.Allcode, as: 'timeTypeData', attributes: ['value_en', 'value_vi'] },
+                        { model: db.User, as: 'doctorData', attributes: ['firstName', 'lastName'] },
                     ],
                     raw: true,
                     nest: true
@@ -375,6 +376,113 @@ let getExtraInfoDoctorById = (doctorId) => {
     });
 }
 
+let getProfileDoctorById = (doctorId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            console.log("from service id", doctorId);
+            if (!doctorId) {
+                resolve({
+                    errCode: 1,
+                    message: "Missing Id",
+                });
+            } else {
+                let data = await db.User.findOne({
+                    where: { id: doctorId },
+                    attributes: { exclude: ["email", "password"] },
+                    include: [
+                        {
+                            model: db.Markdown,
+                            attributes: ["description"],
+                        },
+                        {
+                            model: db.Doctor_info,
+                            // attributes: ["contentHTML", "contentMarkdown", "description",],
+                            include: [
+                                { model: db.Allcode, as: "priceTypeData", attributes: ["value_en", "value_vi"], },
+                                { model: db.Allcode, as: "paymentTypeData", attributes: ["value_en", "value_vi"] },
+                                { model: db.Allcode, as: "provinceTypeData", attributes: ["value_en", "value_vi"] },
+                            ]
+                        },
+                        { model: db.Allcode, as: "positionData", attributes: ["value_en", "value_vi"] },
+                    ],
+                    raw: false,
+                    nest: true,
+                });
+                // console.log("from service", data);
+                if (data) {
+                    resolve({
+                        errCode: 0,
+                        message: "Get detail successful",
+                        data: data,
+                    });
+                } else {
+                    reject({
+                        errCode: 2,
+                        message: "Doctor not found",
+                        data: {},
+                    });
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            reject({
+                errCode: -1,
+                message: "Error get extra detail",
+            });
+        }
+    });
+}
+
+
+let getListPatientForDoctor = (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            console.log(doctorId, date);
+
+            if (!doctorId || !date) {
+                resolve({
+                    errCode: 1,
+                    message: "Missing required param!",
+                });
+            } else {
+                let dataSchedule = await db.Booking.findAll({
+                    where: { statusId: "S2", doctorId: doctorId, date: date },
+                    include: [
+                        {
+                            model: db.User, as: 'patientData',
+                            attributes: ['email', 'firstName', 'address', 'gender'],
+                            include: [{
+                                model: db.Allcode, as: 'genderData', attributes: ['value_en', 'value_vi']
+                            },
+                            ]
+
+                        }, {
+                            model: db.Allcode, as: 'timeTypeDataPatient', attributes: ['value_en', 'value_vi']
+                        }
+                    ], 
+                    raw: true,
+                    nest: true
+                });
+
+                // console.log(dataSchedule);
+
+                resolve({
+                    errCode: 0,
+                    message: "Fetch Data Schedule Successful!",
+                    data: dataSchedule || []
+                })
+
+            }
+        } catch (error) {
+            console.log(error);
+            reject({
+                errCode: -1,
+                message: "Error get detail",
+            });
+        }
+    })
+}
+
 export default {
     getTopDoctor,
     getAllDoctor,
@@ -383,4 +491,6 @@ export default {
     bulkCreateSchedule,
     getScheduleByDate,
     getExtraInfoDoctorById,
+    getProfileDoctorById,
+    getListPatientForDoctor,
 };

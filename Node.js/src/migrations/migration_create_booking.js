@@ -19,9 +19,12 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             date: {
-                type: Sequelize.DATE,
+                type: Sequelize.STRING,
             },
-            time_type: {
+            timeType: {
+                type: Sequelize.STRING,
+            },
+            token: {
                 type: Sequelize.STRING,
             },
 

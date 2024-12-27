@@ -2,9 +2,10 @@
     "home-header": {
         "all": "Tất cả",
         "support": "Hỗ trợ",
-        "appointment": "Lịch hẹn",
+        "appointment": "Cuộc hẹn",
         "welcome": "Chào mừng, "
     },
+
     "login": {
         "login": "Đăng nhập",
         "username": "Tên đăng nhập",
@@ -26,27 +27,31 @@
         },
         "admin": {
             "user": "Người dùng",
-            "manage-user": "Quản lý Người dùng",
-            "manage-admin": "Quản lý Admin",
-            "manage-doctor": "Quản lý Bác sĩ",
-            "crud-user": "crud người dùng",
-            "crud-redux": "crud admin",
+            "manage-user": "Quản lý người dùng",
+            "manage-admin": "Quản lý admin",
+            "manage-doctor": "Quản lý bác sĩ",
+            "crud-user": "CRUD người dùng",
+            "crud-redux": "CRUD Admin",
             "clinic": "Phòng khám",
-            "manage-clinic": "Quản lý Phòng khám",
+            "manage-clinic": "Quản lý phòng khám",
             "specialty": "Chuyên khoa",
-            "manage-specialty": "Quản lý Chuyên khoa",
-            "blog": "Blog",
-            "manage-blog": "Quản lý Blog"
+            "manage-specialty": "Quản lý chuyên khoa",
+            "blog": "Bài viết",
+            "manage-blog": "Quản lý bài viết"
         },
         "doctor": {
-            "manage-schedule": "Quản lý Lịch làm việc"
+            "manage-schedule": "Quản lý lịch khám",
+            "manage-patient": "Quản lý bệnh nhân",
+            "choose-doctor": "Chọn bác sĩ",
+            "choose-date": "Chọn ngày",
+            "Save": "Lưu"
         }
     },
     "form": {
         "email": "Email",
         "password": "Mật khẩu",
-        "firstName": "Tên",
-        "lastName": "Họ",
+        "firstName": "Họ",
+        "lastName": "Tên",
         "address": "Địa chỉ",
         "phone": "Số điện thoại",
         "gender": "Giới tính",
@@ -54,37 +59,46 @@
         "position": "Chức vụ",
         "image": "Hình ảnh",
         "imageLoad": "Tải ảnh lên",
-        "create": "Tạo Người dùng",
+        "create": "Tạo người dùng",
         "edit": "Lưu thay đổi",
-        "create-detail": "Tạo Thông tin"
+        "create-detail": "Tạo thông tin"
     },
     "doctor": {
-        "manage-schedule": "Quản lý lịch làm việc",
-        "choose-doctor": "Chọn Bác sĩ",
-        "choose-date": "Chọn Ngày",
+        "manage-schedule": "Quản lý lịch khám",
+        "manage-patient": "Quản lý bệnh nhân khám bệnh",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
         "Save": "Lưu"
     },
     "patient": {
         "detail-doctor": {
-            "schedule": "Thời gian Lịch hẹn",
-            "schedule-none": "Bác sĩ không có lịch hẹn vào thời gian này, vui lòng chọn thời gian khác.",
+            "schedule": "Thời gian lịch khám",
+            "schedule-none": "Bác sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
             "text-first": "Chọn ",
             "text-last": " và đặt lịch (Miễn phí)"
+        },
+        "extra": {
+            "clinic-address": "ĐỊA CHỈ PHÒNG KHÁM",
+            "price": "Giá khám bệnh: ",
+            "note": "Ghi chú: ",
+            "payment": "Phòng khám có các phương thức thanh toán sau: ",
+            "more": "Xem thêm",
+            "close": "Thu gọn"
         }
     },
     "admin": {
         "manage-doctor": {
-            "title": "Tạo Thông tin Bác sĩ",
-            "choose-doctor": "Chọn Bác sĩ",
-            "doctor-info": "Giới thiệu về Bác sĩ",
+            "title": "Tạo thông tin bác sĩ",
+            "choose-doctor": "Chọn bác sĩ",
+            "doctor-info": "Giới thiệu bác sĩ",
             "more-articles": "Thêm bài viết",
             "save": "Lưu",
             "add": "Tạo mới",
             "price": "Giá",
             "payment": "Thanh toán",
             "province": "Tỉnh/Thành phố",
-            "nameClinic": "Tên Phòng khám",
-            "addressClinic": "Địa chỉ Phòng khám",
+            "nameClinic": "Tên phòng khám",
+            "addressClinic": "Địa chỉ phòng khám",
             "note": "Ghi chú"
         }
     }

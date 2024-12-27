@@ -2,11 +2,42 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Slider from "react-slick";
 import './Section.scss'
-
-
+import { getAllSpecialty } from '../../../services/userService'
+import { LANGUAGES } from '../../../utils';
+import { FormattedMessage } from "react-intl";
 class Specialty extends Component {
+    constructor(props) {
+        super(props)
+        this.state = ({
+            dataSpecialty: '',
+        })
+    }
+
+    async componentDidMount() {
+        this.getDataAllSpecialty()
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.language !== this.props.language) {
+
+        }
+        
+    }
+
+    getDataAllSpecialty = async () => {
+        let res = await getAllSpecialty()
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataSpecialty: res.data
+            })
+        }
+        console.log(this.state.dataSpecialty);
+    }
 
     render() {
+        let { dataSpecialty } = this.state
+        let { language } = this.props
+
         const settings = {
             dots: false,
             infinite: false,
@@ -19,7 +50,7 @@ class Specialty extends Component {
                 <div className='container' >
                     <div className='section-specialty'>
                         <div className='section-content'>
-                            <p className='section-text'>Chuyên Khoa</p>
+                            <p className='section-text'><FormattedMessage id="home-page.specialty" /></p>
                             <button className='section-btn'>
                                 Xem Thêm
                             </button>
@@ -27,36 +58,20 @@ class Specialty extends Component {
                         <div className='section-body'>
                             <div className="slider-container">
                                 <Slider {...settings}>
-                                    <div className='slider-items'>
-                                        <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
-                                        </div>
-                                    </div>
-                                    <div className='slider-items'>
-                                        <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
-                                        </div>
-                                    </div>
-                                    <div className='slider-items'>
-                                        <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
-                                        </div>
-                                    </div>
-                                    <div className='slider-items'>
-                                        <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
-                                        </div>
-                                    </div>
-                                    <div className='slider-items'>
-                                        <div className='slider-content'>
-                                            <img src="./images/101627-co-xuong-khop.png" alt="React Image" className='slider-img' />
-                                            <div className='slider-text'>Cơ Xương Khớp 2</div>
-                                        </div>
-                                    </div>
+                                    {dataSpecialty && dataSpecialty.length > 0 &&
+                                        dataSpecialty.map((item, index) => {
+                                            console.log(item);
+                                            return (
+                                                <div key={index} className='slider-items' onClick={() => this.handleViewDetailDoctor(item)}>
+                                                    <div className='slider-content'>
+                                                        <img src={item.image} alt={item.text} className='slider-img' />
+                                                        <div className='slider-text'>{item.name}</div>
+                                                        {/* <div className='slider-text'>Chuyen khoa</div> */}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </Slider>
                             </div>
                         </div>
@@ -72,7 +87,8 @@ class Specialty extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 

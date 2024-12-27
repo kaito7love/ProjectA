@@ -6,6 +6,7 @@ import localization from 'moment/locale/vi'
 import { getScheduleByDate } from '../../../services/userService';
 import moment from 'moment';
 import { FormattedMessage } from "react-intl";
+import BookingModel from './model/BookingModel';
 
 
 class DoctorSchedule extends Component {
@@ -14,6 +15,8 @@ class DoctorSchedule extends Component {
     this.state = ({
       allDays: [],
       allAvailableTime: [],
+      isOpenModel: false,
+      dataTime: '',
     })
   }
 
@@ -101,7 +104,19 @@ class DoctorSchedule extends Component {
       console.log(res);
     }
   }
+  handleBookingModel = (time) => {
 
+    this.setState({
+      isOpenModel: true,
+      dataTime: time
+    });
+  };
+
+  toggleBookingModel = () => {
+    this.setState({
+      isOpenModel: !this.state.isOpenModel,
+    });
+  };
   render() {
     let { allDays, allAvailableTime } = this.state
     let { language } = this.props
@@ -140,7 +155,9 @@ class DoctorSchedule extends Component {
                       {allAvailableTime.map((item, index) => {
                         let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.value_vi : item.timeTypeData.value_en
                         return (
-                          <button className='btn btn-outline-primary btn-size' key={index} >{timeDisplay}</button>
+                          <button className='btn btn-outline-primary btn-size' key={index}
+                            onClick={() => this.handleBookingModel(item)}
+                          >{timeDisplay}</button>
                         )
                       })}
                     </div>
@@ -156,6 +173,12 @@ class DoctorSchedule extends Component {
               </div>
             </div>
           </div>
+
+          <BookingModel
+            isOpen={this.state.isOpenModel}
+            toggleBookingModel={this.toggleBookingModel}
+            dataTime={this.state.dataTime}
+          />
         </div>
       </React.Fragment>
     );

@@ -101,7 +101,6 @@ class UserRedux extends Component {
                 isOpen: true
             })
         }
-
     }
 
     onChangeInput = (event, id) => {
@@ -208,7 +207,7 @@ class UserRedux extends Component {
                                 <div className="col-md-6">
                                     <label className="form-label"><FormattedMessage id='form.password' /></label>
                                     <input type="password" className="form-control"
-                                     disabled={this.state.action === manageActions.EDIT ? true : false}
+                                        disabled={this.state.action === manageActions.EDIT ? true : false}
                                         value={password}
                                         onChange={(event) => { this.onChangeInput(event, 'password') }} />
                                 </div>
