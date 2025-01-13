@@ -101,12 +101,12 @@ class HomeHeader extends Component {
                                 </p>
                             </div>
                         </div>
-                        <div className="make-color">
+                        {/* <div className="make-color">
                             <div
                                 className="elfsight-app-eb02f6eb-0039-4a52-b932-28e9a5de5b9d"
                                 data-elfsight-app-lazy
                             ></div>
-                        </div>
+                        </div> */}
                         <div className="header-language">
                             <div className="language">
                                 <div className={language === LANGUAGES.VI ? "Vie action" : "Vie"}>
@@ -117,12 +117,14 @@ class HomeHeader extends Component {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="header-info">
-                            <div className="header-login">
-                                <i class="fas fa-sign-in-alt"></i>
-                                <p>login</p>
-                            </div>
-                        </div> */}
+                        <div className="header-info">
+                            <a href="http://localhost:3000/login">
+                                <div className="header-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <p>Login</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

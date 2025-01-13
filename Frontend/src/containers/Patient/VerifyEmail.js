@@ -57,8 +57,8 @@ class VerifyEmail extends Component {
                         :
                         <div>
                             {+errCode === 0 ?
-                                <div className='info-booking'>Xác nhận lịch hẹn thành công!</div> :
-                                <div className='info-booking'>Lịch hẹn không tồn tại hoặc đã được xác nhận!</div>
+                                <div className='info-booking'>Appointment successfully confirmed!</div> :
+                                <div className='info-booking'>The appointment does not exist or has already been confirmed!</div>
                             }
                         </div>
                     }

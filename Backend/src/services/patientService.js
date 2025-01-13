@@ -13,13 +13,34 @@ let buildUrlEmail = (doctorId, token) => {
 let postBookingAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log("from service patient", data);
+            console.log("from postBookingAppointment", data);
             if (!data.email || !data.doctorId || !data.timeType || !data.date || !data.fullName || !data.gender || !data.address) {
                 resolve({
                     errCode: 1,
                     message: "Missing data input",
                 });
             } else {
+
+                let scheduleDoctor = await db.Schedule.findOne({
+                    where: {
+                        doctorId: data.doctorId,
+                        timeType: data.timeType,
+                        date: data.date,
+                    },
+                    raw: false
+                });
+                if (scheduleDoctor && scheduleDoctor.currentNumber < 3) {
+                    scheduleDoctor.currentNumber += 1;
+                    await scheduleDoctor.save();
+
+                    console.log('Updated currentNumber:', scheduleDoctor.currentNumber);
+                } else {
+                    resolve({
+                        errCode: 1,
+                        message: "Doctor is full booking in this Time!"
+                    })
+                    console.log('Schedule not found.');
+                }
 
                 let token = uuidv4()
                 await emailService.sendEmail({
@@ -41,24 +62,21 @@ let postBookingAppointment = (data) => {
                         address: data.address,
                     }
                 });
-                if (user) {
-                    let booking = await db.Booking.findOrCreate({
-                        where: { patientId: user[0].id, },
-                        defaults: {
-                            statusId: 'S1',
-                            doctorId: data.doctorId,
-                            patientId: user[0].id,
-                            date: data.date,
-                            timeType: data.timeType,
-                            token: token
-                        }
 
+                if (user) {
+                    let booking = await db.Booking.create({
+                        statusId: 'S1',
+                        doctorId: data.doctorId,
+                        patientId: user[0].id,
+                        date: data.date,
+                        timeType: data.timeType,
+                        token: token
                     })
+
                     resolve({
                         errCode: 0,
                         message: "Booking Appointment Successful!",
                         data: booking
-
                     })
                 }
 
@@ -77,6 +95,7 @@ let postBookingAppointment = (data) => {
 let postVerifyBookingAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            // console.log("form postVerifyBookingAppointment check", data);
 
             if (!data.token || !data.doctorId) {
                 resolve({
@@ -84,6 +103,7 @@ let postVerifyBookingAppointment = (data) => {
                     message: "Missing parameters",
                 })
             } else {
+
                 let appointment = await db.Booking.findOne({
                     where: {
                         doctorId: data.doctorId,
@@ -92,12 +112,24 @@ let postVerifyBookingAppointment = (data) => {
                     },
                     raw: false
                 })
-
-                // console.log(appointment);
-
+                let scheduleDoctor
                 if (appointment) {
+                    scheduleDoctor = await db.Schedule.findOne({
+                        where: {
+                            doctorId: data.doctorId,
+                            timeType: appointment.timeType,
+                            date: appointment.date,
+                        },
+                        raw: false
+                    });
+                }
+                // console.log(scheduleDoctor);
+                
+                if (appointment && scheduleDoctor && scheduleDoctor.currentNumber < scheduleDoctor.maxNumber) {
                     appointment.statusId = "S2"
                     await appointment.save();
+                    scheduleDoctor.currentNumber += 1;
+                    await scheduleDoctor.save();
 
                     resolve({
                         errCode: 0,
@@ -106,7 +138,7 @@ let postVerifyBookingAppointment = (data) => {
                 } else {
                     resolve({
                         errCode: 2,
-                        message: "Appointment has been activated or not exist!",
+                        message: "Doctor is full booking in this Time!",
                     })
                 }
             }
