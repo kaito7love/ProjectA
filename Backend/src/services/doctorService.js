@@ -67,35 +67,48 @@ let getAllDoctor = () => {
         }
     });
 };
+
+let requiredFields = (data) => {
+    console.log("from service", data);
+    const requiredFields = [
+        'doctorId',
+        'contentHTML',
+        'contentMarkdown',
+        'selectedPrice',
+        'selectedPayment',
+        'selectedProvince',
+        'nameClinic',
+        'addressClinic',
+        'clinicId',
+        'specialtyId',
+    ];
+    let isValid = true;
+    let element = "";
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            isValid = false;
+            element = field;
+            break;
+        }
+    }
+    return {
+        isValid: isValid,
+        element: element
+    }
+}
+
 let postInfoDoctor = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // console.log("from service",data);
-            // const requiredFields = [
-            //     'doctorId',
-            //     'contentHTML',
-            //     'contentMarkdown',
-            //     'selectedPrice',
-            //     'selectedPayment',
-            //     'selectedProvince',
-            //     'nameClinic',
-            //     'addressClinic'
-            // ];
 
-            // for (const field of requiredFields) {
-            //     if (!data[field]) {
-            //         console.error(`Missing required field: ${field}`);
-            //         return false;
-            //     }
-            // }
+            let checkInput = requiredFields(data)
 
-            if (!data.doctorId || !data.contentHTML || !data.contentMarkdown ||
-                !data.selectedPrice || !data.selectedPayment || !data.selectedProvince ||
-                !data.nameClinic || !data.addressClinic) {
+
+            if (!checkInput.isValid) {
                 resolve({
                     errCode: 1,
                     message:
-                        "MIssing content is required for updating doctor information",
+                        `MIssing :${checkInput.element} is required for updating doctor information`,
                 });
             } else {
                 let doctor = await db.Markdown.findOne({
@@ -126,6 +139,7 @@ let postInfoDoctor = (data) => {
                         contentHTML: data.contentHTML,
                         contentMarkdown: data.contentMarkdown,
                         description: data.description,
+
                     });
                     resolve({
                         errCode: 0,
@@ -149,6 +163,8 @@ let postInfoDoctor = (data) => {
                             nameClinic: data.nameClinic,
                             addressClinic: data.addressClinic,
                             note: data.note,
+                            clinicId: data.clinicId,
+                            specialtyId: data.specialtyId,
                         },
                         {
                             where: { doctorId: data.doctorId },
@@ -169,6 +185,8 @@ let postInfoDoctor = (data) => {
                         nameClinic: data.nameClinic,
                         addressClinic: data.addressClinic,
                         note: data.note,
+                        clinicId: data.clinicId,
+                        specialtyId: data.specialtyId,
                     });
                     resolve({
                         errCode: 0,
@@ -186,6 +204,7 @@ let postInfoDoctor = (data) => {
         }
     });
 };
+
 let getDetailDoctorById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -459,7 +478,7 @@ let getListPatientForDoctor = (doctorId, date) => {
                         }, {
                             model: db.Allcode, as: 'timeTypeDataPatient', attributes: ['value_en', 'value_vi']
                         }
-                    ], 
+                    ],
                     raw: true,
                     nest: true
                 });
@@ -483,6 +502,47 @@ let getListPatientForDoctor = (doctorId, date) => {
     })
 }
 
+let getDetailSpecialtyById = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!id) {
+                reject({
+                    errCode: -1,
+                    message: "Missing id to get specialty",
+                });
+            } else {
+                let data = await db.Specialty.findOne({
+                    where: {
+                        id: id
+                    },
+                    attributes: ['descriptionMarkdown', 'descriptionHTML'],
+                })
+                if (data) {
+                    arrDoctorId = []
+                    let doctorSpecialty = await db.Doctor_info.findAll({
+                        where: {
+                            specialtyId: id,
+                            
+                        }
+                    })
+                }
+
+                resolve({
+                    errCode: 0,
+                    message: "Get Data Specialty Successful!",
+                    data: data || {}
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            reject({
+                errCode: -1,
+                message: "Error get detail specialty",
+            });
+        }
+    })
+}
+
 export default {
     getTopDoctor,
     getAllDoctor,
@@ -493,4 +553,5 @@ export default {
     getExtraInfoDoctorById,
     getProfileDoctorById,
     getListPatientForDoctor,
+    getDetailSpecialtyById,
 };

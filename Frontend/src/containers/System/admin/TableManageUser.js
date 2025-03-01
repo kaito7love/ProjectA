@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./TableManageUser.scss";
-import { emitter } from "../../../utils/emitter";
-import { getAllUsers, createUserService, deleteUserService, editUserService, } from "../../../services/userService";
 import * as actions from "../../../store/actions";
 
 class TableManageUser extends Component {
@@ -11,116 +8,109 @@ class TableManageUser extends Component {
         super(props);
         this.state = {
             arrUsers: [],
-            userEdit: {},
-            postContent: "_Hello,_ **Markdown**!", // Define the initial state here
+            searchQuery: '',
         };
     }
-
-    handleEditorChange = ({ html, text }) => {
-        console.log("Editor Change:", html, text);
-        this.setState({ postContent: text }); // Update state when the editor content changes
-    };
 
     async componentDidMount() {
         this.props.fetchAllUser();
     }
 
-    componentDidUpdate(prevProps, prevStates, snapShot) {
+    componentDidUpdate(prevProps) {
         if (prevProps.users !== this.props.users) {
-            let arrUsers = this.props.users;
-            this.setState({
-                arrUsers: arrUsers,
-            })
+            this.setState({ arrUsers: this.props.users });
         }
-
     }
 
     handleDeleteUser = async (user) => {
-        await this.props.deleteUser(user)
-
+        await this.props.deleteUser(user);
     };
 
     handleEditUser = (user) => {
-        console.log("edit by id:", user);
-        this.props.handleEditUsers(user)
+        this.props.handleEditUsers(user);
     };
 
+    handleSearchChange = (event) => {
+        this.setState({ searchQuery: event.target.value });
+        console.log(event)
+    };
+
+    filterUsers = () => {
+        let { arrUsers, searchQuery } = this.state;
+        if (!searchQuery) return arrUsers;
+        
+        return arrUsers.filter(
+            (user) =>
+                (user.email?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+                (user.firstName?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
+                (user.lastName?.toLowerCase() || "").includes(searchQuery.toLowerCase())
+        );
+    };
 
     render() {
-        let arrUsers = this.state.arrUsers;
+        let filteredUsers = this.filterUsers();
+        console.log(filteredUsers);
+
         return (
             <React.Fragment>
                 <div className="users-container">
+                    <input
+                        type="text"
+                        placeholder="Search by name or email"
+                        value={this.state.searchQuery}
+                        onChange={this.handleSearchChange}
+                        className="search-input"
+                    />
                     <div className="users-table mt-4 mb-4">
                         <table id="customers">
                             <thead>
                                 <tr>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Action</th>
+                                    <th>Email</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                {arrUsers &&
-                                    arrUsers.map((item, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{item.email}</td>
-                                                <td>{item.firstName}</td>
-                                                <td>{item.lastName}</td>
-                                                <td>{item.address}</td>
-                                                <td>
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-outline-success btn-Edit"
-                                                        onClick={() =>
-                                                            this.handleEditUser(
-                                                                item
-                                                            )
-                                                        }
-                                                    >
-                                                        <i className="fas fa-user-edit"></i>
-                                                    </button>
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-outline-danger btn-Delete"
-                                                        onClick={() =>
-                                                            this.handleDeleteUser(
-                                                                item
-                                                            )
-                                                        }
-                                                    >
-                                                        <i className="fas fa-user-slash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
+                                {filteredUsers.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.email}</td>
+                                        <td>{item.firstName}</td>
+                                        <td>{item.lastName}</td>
+                                        <td>{item.address}</td>
+                                        <td>
+                                            <button
+                                                className="btn btn-outline-success btn-Edit"
+                                                onClick={() => this.handleEditUser(item)}
+                                            >
+                                                <i className="fas fa-user-edit"></i>
+                                            </button>
+                                            <button
+                                                className="btn btn-outline-danger btn-Delete"
+                                                onClick={() => this.handleDeleteUser(item)}
+                                            >
+                                                <i className="fas fa-user-slash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </React.Fragment>
-
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        users: state.admin.users
-    };
-};
+const mapStateToProps = (state) => ({
+    users: state.admin.users,
+});
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchAllUser: () => dispatch(actions.fetchAllUserStart()),
-        deleteUser: (data) => dispatch(actions.deleteUser(data))
-    };
-};
+const mapDispatchToProps = (dispatch) => ({
+    fetchAllUser: () => dispatch(actions.fetchAllUserStart()),
+    deleteUser: (data) => dispatch(actions.deleteUser(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableManageUser);

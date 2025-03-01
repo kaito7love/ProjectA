@@ -98,6 +98,8 @@
             "payment": "Payment",
             "province": "Province",
             "nameClinic": "Clinic's Name",
+            "specialty": "Specialty's Name",
+            "select-clinic": "Select Clinic",
             "addressClinic": "Clinic's Address",
             "note": "Note"
         },

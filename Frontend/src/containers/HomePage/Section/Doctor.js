@@ -29,11 +29,10 @@ class Doctor extends Component {
         }
     }
     //access detail
-    handleViewDetailDoctor = (doctor) => {
+    handleViewDetailDoctor = (item) => {
         if (this.props.history) {
-            this.props.history.push(`/detail-doctor/${doctor.id}`)
+            this.props.history.push(`/detail-doctor/${item.id}`)
         }
-
     }
     render() {
         const settings = {
@@ -54,7 +53,7 @@ class Doctor extends Component {
                 <div className='container' >
                     <div className='section-doctor'>
                         <div className='section-content'>
-                        <p className='section-text'><FormattedMessage id="home-page.doctor" /></p>
+                            <p className='section-text'><FormattedMessage id="home-page.doctor" /></p>
                             <button className='section-btn'>
                                 Xem Thêm
                             </button>

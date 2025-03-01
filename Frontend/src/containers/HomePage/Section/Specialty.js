@@ -5,6 +5,10 @@ import './Section.scss'
 import { getAllSpecialty } from '../../../services/userService'
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from "react-intl";
+import { withRouter } from 'react-router-dom';
+
+
+
 class Specialty extends Component {
     constructor(props) {
         super(props)
@@ -32,6 +36,13 @@ class Specialty extends Component {
             })
         }
         console.log(this.state.dataSpecialty);
+    }
+
+     //access detail
+     handleViewDetailSpecialty = (item) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-specialty/${item.id}`)
+        }
     }
 
     render() {
@@ -62,7 +73,7 @@ class Specialty extends Component {
                                         dataSpecialty.map((item, index) => {
                                             console.log(item);
                                             return (
-                                                <div key={index} className='slider-items' onClick={() => this.handleViewDetailDoctor(item)}>
+                                                <div key={index} className='slider-items' onClick={() => this.handleViewDetailSpecialty(item)}>
                                                     <div className='slider-content'>
                                                         <img src={item.image} alt={item.text} className='slider-img' />
                                                         <div className='slider-text'>{item.name}</div>
@@ -97,4 +108,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Specialty));
