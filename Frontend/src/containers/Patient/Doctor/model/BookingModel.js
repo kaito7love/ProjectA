@@ -199,7 +199,7 @@ class BookingModel extends Component {
 
     render() {
         let { language, toggleBookingModel, dataTime } = this.props
-        console.log("check state: ", this.state);
+        // console.log("check state: ", this.state);
         let priceVi = this.state.dataProfile ? this.state.dataProfile.Doctor_info.priceTypeData.value_vi : ""
         let priceEn = this.state.dataProfile ? this.state.dataProfile.Doctor_info.priceTypeData.value_en : ""
 

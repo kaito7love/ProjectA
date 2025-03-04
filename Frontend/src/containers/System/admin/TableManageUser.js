@@ -54,13 +54,16 @@ class TableManageUser extends Component {
         return (
             <React.Fragment>
                 <div className="users-container">
-                    <input
-                        type="text"
-                        placeholder="Search by name or email"
-                        value={this.state.searchQuery}
-                        onChange={this.handleSearchChange}
-                        className="search-input"
-                    />
+                    <div className="search-container">
+                        <input
+                            type="text"
+                            placeholder="Search by name, email"
+                            value={this.state.searchQuery}
+                            onChange={this.handleSearchChange}
+                            className="search-input"
+                            style={{ marginBottom: "10px" }}
+                        />
+                    </div>
                     <div className="users-table mt-4 mb-4">
                         <table id="customers">
                             <thead>
@@ -69,6 +72,7 @@ class TableManageUser extends Component {
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Address</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -79,6 +83,11 @@ class TableManageUser extends Component {
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>
                                         <td>{item.address}</td>
+                                        <td>
+                                            {item.roleId === "R1" ? "Admin" :
+                                             item.roleId === "R2" ? "Doctor" :
+                                             item.roleId === "R3" ? "Patient" : "N/A"}
+                                        </td>
                                         <td>
                                             <button
                                                 className="btn btn-outline-success btn-Edit"

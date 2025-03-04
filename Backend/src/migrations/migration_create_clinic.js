@@ -9,6 +9,9 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
+            clinicId: {
+                type: Sequelize.INTEGER,
+            },
             name: {
                 type: Sequelize.STRING,
             },
@@ -16,6 +19,12 @@ module.exports = {
                 type: Sequelize.STRING,
             },
             description: {
+                type: Sequelize.TEXT,
+            },
+            descriptionMarkdown: {
+                type: Sequelize.TEXT,
+            },
+            descriptionHTML: {
                 type: Sequelize.TEXT,
             },
             image: {
@@ -30,6 +39,7 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
+
         });
     },
     async down(queryInterface, Sequelize) {

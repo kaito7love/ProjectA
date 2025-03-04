@@ -6,6 +6,7 @@ import { getProfileDoctorById } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import _ from 'lodash';
 import moment from 'moment';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 
 
@@ -73,11 +74,10 @@ class ProfileDoctor extends Component {
     }
 
     render() {
-        let { language, isShowDescription, dataTime } = this.props
+        let { language, isShowDescription, dataTime, isShowDetail, doctorId } = this.props
         let detailDoctor = this.state.dataProfile;
         let nameVi, nameEn;
         // console.log(dataTime);
-
         if (detailDoctor && detailDoctor.positionData) {
             nameVi = `${detailDoctor.positionData.value_vi}, ${detailDoctor.lastName} ${detailDoctor.firstName}`;
             nameEn = `${detailDoctor.positionData.value_en}, ${detailDoctor.firstName} ${detailDoctor.lastName}`;
@@ -109,10 +109,13 @@ class ProfileDoctor extends Component {
                             </div>
                         }
                     </div>
-
-
                 </div>
+                <div className='more-doctor-detail'>
+                    {isShowDetail === true && <div>
 
+                        <Link to={`/detail-doctor/${doctorId}`}>Xem thêm</Link>
+                    </div>}
+                </div>
             </React.Fragment>
         );
     }

@@ -33,6 +33,7 @@ class DoctorSchedule extends Component {
           allAvailableTime: res.data ? res.data : []
         })
       }
+      this.sortDateTime()
     }
     this.setState({
       allDays: allDays
@@ -56,6 +57,7 @@ class DoctorSchedule extends Component {
           allAvailableTime: res.data ? res.data : []
         })
       }
+      this.sortDateTime()
     }
 
   }
@@ -101,8 +103,22 @@ class DoctorSchedule extends Component {
           allAvailableTime: res.data ? res.data : []
         })
       }
-      console.log(res);
+      console.log("check get allAvailableTime", res);
+      this.sortDateTime()
     }
+  }
+  sortDateTime = () => {
+    let sortedData = this.state.allAvailableTime.sort((a, b) => {
+      // Trích xuất số từ timeType, ví dụ: "T1" -> 1, "T2" -> 2
+      let timeA = parseInt(a.timeType.slice(1));
+      let timeB = parseInt(b.timeType.slice(1));
+      return timeA - timeB;  // Sắp xếp tăng dần
+    });
+
+    // console.log(sortedData);
+    this.setState({
+      allAvailableTime: sortedData
+    })
   }
   handleBookingModel = (time) => {
 
@@ -120,7 +136,7 @@ class DoctorSchedule extends Component {
   render() {
     let { allDays, allAvailableTime } = this.state
     let { language } = this.props
-    // console.log(this.state.doctorId);
+    console.log("check state from scheule", this.state);
 
     return (
       <React.Fragment>

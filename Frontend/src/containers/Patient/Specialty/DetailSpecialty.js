@@ -7,18 +7,24 @@ import HomeFooter from '../../HomePage/Footer/HomeFooter';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
 import DoctorExtraInfo from '../Doctor/DoctorExtraInfo';
-
+import { getAllCodeService, getDetailSpecialtyService } from '../../../services/userService';
+import _ from 'lodash';
+import Select from 'react-select';
+import { LANGUAGES, LanguageUtils } from '../../../utils';
 
 class DetailSpecialty extends Component {
     constructor(props) {
         super(props)
         this.state = ({
-            arrDoctorId: [63, 11, 13]
+            arrDoctorId: [],
+            dataDetailSpecialty: {},
+            location: 'all',
+            listProvince: [],
         })
     }
 
     async componentDidMount() {
-
+        await this.fetchDetailSpecialty()
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -27,49 +33,98 @@ class DetailSpecialty extends Component {
         }
 
     }
+
+    handleChangeProvince = (event) => {
+        this.setState({ location: event.target.value }, () => {
+            console.log(this.state.location);
+            this.fetchDetailSpecialty();
+        });
+    };
+
+    fetchDetailSpecialty = async () => {
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
+            let id = this.props.match.params.id;
+
+            let res = await getDetailSpecialtyService({
+                specialtyId: id,
+                location: this.state.location
+            });
+            let listProvince = await getAllCodeService("province");
+
+            if (res && res.errCode === 0) {
+                let data = res.data;
+                let arrDoctorId = [];
+                if (data && !_.isEmpty(data)) {
+                    let arr = data.doctorSpecialty;
+                    if (arr && arr.length > 0) {
+                        arrDoctorId = arr.map(item => item.doctorId);
+                    }
+                }
+                let dataProvince = listProvince.data
+                if (dataProvince && dataProvince.length > 0) {
+                    dataProvince.unshift({
+                        keyMap: "all",
+                        value_en: "All",
+                        value_vi: "Toàn Quốc",
+                    })
+                }
+                this.setState({
+                    dataDetailSpecialty: data,
+                    arrDoctorId: arrDoctorId,
+                    listProvince: listProvince.data,
+                });
+            }
+        }
+    };
     render() {
-        let { arrDoctorId } = this.state
+        let { arrDoctorId, dataDetailSpecialty, location, listProvince } = this.state
         let { language } = this.props
+        console.log("check specialty state", this.state);
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <HomeHeader />
                 <div className='detail-specialty-background'>
                     <div className='detail-specialty-container'>
-                        <div className='decription-specialty container'>
-                            <div>
-                                Cơ Xương Khớp
-                                Bác sĩ Cơ Xương Khớp giỏi
-                                Danh sách các bác sĩ uy tín đầu ngành Cơ Xương Khớp tại Việt Nam:
-
-                                Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm
-                                Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội
-                                Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Cơ Xương Khớp - Bệnh viện Bạch Mai, Bệnh viện Hữu nghị Việt Đức,Bệnh Viện E.
-                                Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội Cơ Xương Khớp, Hội Thấp khớp học,...
-                                Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,...
-                                Bệnh Cơ Xương Khớp
-                                Gout
-                                Thoái hóa khớp: khớp gối, cột sống thắt lưng, cột sống cổ
-                                Viêm khớp dạng thấp, Viêm đa khớp, Viêm gân
-                                Tràn dịch khớp gối, Tràn dịch khớp háng, Tràn dịch khớp khủy, Tràn dịch khớp vai
-                                Loãng xương, đau nhức xương
-                                Viêm xương, gai xương
-                                Viêm cơ, Teo cơ, chứng đau mỏi cơ
-                                Yếu cơ, Loạn dưỡng cơ
-                                Các chấn thương về cơ, xương, khớp
-                                ...
+                        <div className='description-specialty container'>
+                            <div className="specialty-details">
+                                {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
+                                    <div dangerouslySetInnerHTML={{ __html: dataDetailSpecialty.descriptionHTML }}></div>
+                                }
                             </div>
+
                         </div>
-                        <div className='detail-specialty'>
+
+                        <div className='detail-specialty '>
+                            <div className='container'>
+                                <div className='search-bar'>
+                                    <select
+                                        className='form-select'
+                                        value={location}
+                                        onChange={this.handleChangeProvince}
+                                    >
+                                        {listProvince && listProvince.length > 0 &&
+                                            listProvince.map((item, index) => {
+                                                return (
+                                                    <option key={index} value={item.keyMap}>
+                                                        {language === LANGUAGES.VI ? item.value_vi : item.value_en}
+                                                    </option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
                             {arrDoctorId && arrDoctorId.length > 0 &&
 
                                 arrDoctorId.map((item, index) => {
                                     return (
                                         <div className='detail-doctor container' key={index}>
                                             <div className='content-left'>
+                                                {/* <Link to={`/detail-doctor/${doctorId}`}>Xem thêm</Link> */}
                                                 <ProfileDoctor
-                                                    // doctorId={this.state.currentDoctorId}
                                                     doctorId={item}
                                                     isShowDescription={true}
+                                                    isShowDetail={true}
                                                 />
 
                                             </div>
@@ -96,7 +151,7 @@ class DetailSpecialty extends Component {
                     </div>
                 </div>
                 <HomeFooter />
-            </React.Fragment>
+            </React.Fragment >
         );
     }
 }

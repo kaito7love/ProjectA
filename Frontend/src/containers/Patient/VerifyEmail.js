@@ -4,6 +4,8 @@ import { FormattedMessage } from "react-intl";
 import './VerifyEmail.scss'
 import HomeHeader from '../HomePage/Header/HomeHeader';
 import { postVerifyBookingAppointment } from '../../services/userService';
+import OrderDetails from '../System/payment/OrderDetails';
+
 
 
 
@@ -61,8 +63,11 @@ class VerifyEmail extends Component {
                                 <div className='info-booking'>The appointment does not exist or has already been confirmed!</div>
                             }
                         </div>
+
+                        
                     }
                 </div>
+                <OrderDetails/>
             </React.Fragment>
         );
     }

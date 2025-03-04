@@ -1,8 +1,9 @@
 .detail-specialty-container {
 
-    .decription-specialty {
-        border: 1px solid black;
-        height: 200px;
+    .description-specialty {
+        // border: 1px solid black;
+        // height: 200px;
+        padding: 20px;
     }
 
     .detail-specialty {
@@ -41,4 +42,31 @@
     }
 }
 
-.detail-specialty-backgropund {}
+.search-bar {
+    display        : block;
+    justify-content: center;
+    align-items    : center;
+    margin  :  10px 0;
+    width: 150px;
+
+    select.form-select {
+        padding         : 8px 12px;
+        border          : 1px solid #ddd;
+        border-radius   : 6px;
+        outline         : none;
+        background-color: #fff;
+        transition      : all 0.3s ease;
+
+        &:hover {
+            border-color: #40a9ff;
+        }
+
+        &:focus {
+            border-color: #1890ff;
+            box-shadow  : 0 0 5px rgba(24, 144, 255, 0.5);
+        }
+    }
+}
+.more-doctor-detail{
+    padding-left: 30px;
+}

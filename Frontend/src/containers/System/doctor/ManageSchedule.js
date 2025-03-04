@@ -137,7 +137,7 @@ class ManageSchedule extends Component {
         // console.log("log props", this.props);
         let { scheduleTime } = this.state
         let { language } = this.props
-        let today = new Date(new Date().setDate(new Date().getDate()));
+        let today = new Date(new Date().setDate(new Date().getDate()));// limit create new schedule today
         return (
             <div className="container">
                 <div className="title"><FormattedMessage id="doctor.manage-schedule" /></div>

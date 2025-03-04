@@ -125,19 +125,7 @@ let getListPatientForDoctor = async (req, res) => {
     }
 };
 
-let getDetailSpecialtyById = async (req, res) => {
-    try {
-        let message = await doctorService.getDetailSpecialtyById(req.query.id);
-        // console.log("from controller", message);
 
-        return res.status(200).json(message);
-    } catch (error) {
-        return res.status(200).json({
-            errCode: -1,
-            errMessage: " Err from Server",
-        });
-    }
-};
 export default {
     getTopDoctor,
     getAllDoctor,
@@ -148,5 +136,4 @@ export default {
     getExtraInfoDoctorById,
     getProfileDoctorById,
     getListPatientForDoctor,
-    getDetailSpecialtyById,
 };

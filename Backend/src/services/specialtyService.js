@@ -51,7 +51,67 @@ let getAllSpecialty = () => {
     })
 }
 
+let getDetailSpecialtyById = (specialtyId, location) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!specialtyId || !location) {
+                reject({
+                    errCode: -1,
+                    message: "Missing parameter",
+                });
+            } else {
+                let data = {};
+
+                data = await db.Specialty.findOne({
+                    where: {
+                        id: specialtyId
+                    },
+                    attributes: ['descriptionMarkdown', 'descriptionHTML'],
+                })
+
+                if (data) {
+                    let doctorSpecialty = {};
+                    if (location == 'all') {
+                        doctorSpecialty = await db.Doctor_info.findAll({
+                            where: {
+                                specialtyId: specialtyId,
+                            },
+                            attributes: ['doctorId', 'provinceId'],
+                        })
+                    } else {
+                        // find by location
+                        doctorSpecialty = await db.Doctor_info.findAll({
+                            where: {
+                                specialtyId: specialtyId,
+                                provinceId: location
+                            },
+                            attributes: ['doctorId', 'provinceId'],
+                        })
+                    }
+
+                    data.doctorSpecialty = doctorSpecialty;
+                }
+
+                resolve({
+                    errCode: 0,
+                    message: "Get Data Specialty Successful!",
+                    data: data || {}
+                })
+
+
+
+            }
+        } catch (error) {
+            console.log(error);
+            reject({
+                errCode: -1,
+                message: "Error get detail specialty",
+            });
+        }
+    })
+}
 export default {
     postSpecialtyDescription,
     getAllSpecialty,
+    getDetailSpecialtyById,
 }

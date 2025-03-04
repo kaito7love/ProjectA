@@ -105,8 +105,17 @@
         },
         "manage-specialty": {
             "title": "Manage Specialty",
-            "choose-specialty": "Choose Specialty",
+            "choose-specialty": "Choose Specialty Name",
             "specialty-description": "Specialty description",
+            "more-articles": "More articles",
+            "save": "Save",
+            "add": "Create"
+        },
+        "manage-clinic": {
+            "title": "Manage Clinic",
+            "choose-clinic": "Choose Clinic Name",
+            "clinic-description": "Clinic description",
+            "clinic-address": "Clinic Address",
             "more-articles": "More articles",
             "save": "Save",
             "add": "Create"

@@ -49,7 +49,7 @@ class HomeFooter extends Component {
                             target="_blank"
                             href="https://www.facebook.com/kaito7love"
                         >
-                            Kaito Nguyen
+                            Kaito Kazuki
                         </a>
                     </p>
                 </div>

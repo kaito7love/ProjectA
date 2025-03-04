@@ -351,7 +351,7 @@ let getScheduleByDate = (doctorId, date) => {
 let getExtraInfoDoctorById = (doctorId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log("from service id", doctorId);
+            //console.log("from service id", doctorId);
             if (!doctorId) {
                 reject({
                     errCode: 1,
@@ -398,7 +398,7 @@ let getExtraInfoDoctorById = (doctorId) => {
 let getProfileDoctorById = (doctorId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log("from service id", doctorId);
+            //console.log("from service id", doctorId);
             if (!doctorId) {
                 resolve({
                     errCode: 1,
@@ -502,46 +502,6 @@ let getListPatientForDoctor = (doctorId, date) => {
     })
 }
 
-let getDetailSpecialtyById = (id) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            if (!id) {
-                reject({
-                    errCode: -1,
-                    message: "Missing id to get specialty",
-                });
-            } else {
-                let data = await db.Specialty.findOne({
-                    where: {
-                        id: id
-                    },
-                    attributes: ['descriptionMarkdown', 'descriptionHTML'],
-                })
-                if (data) {
-                    arrDoctorId = []
-                    let doctorSpecialty = await db.Doctor_info.findAll({
-                        where: {
-                            specialtyId: id,
-                            
-                        }
-                    })
-                }
-
-                resolve({
-                    errCode: 0,
-                    message: "Get Data Specialty Successful!",
-                    data: data || {}
-                })
-            }
-        } catch (error) {
-            console.log(error);
-            reject({
-                errCode: -1,
-                message: "Error get detail specialty",
-            });
-        }
-    })
-}
 
 export default {
     getTopDoctor,
@@ -553,5 +513,4 @@ export default {
     getExtraInfoDoctorById,
     getProfileDoctorById,
     getListPatientForDoctor,
-    getDetailSpecialtyById,
 };
